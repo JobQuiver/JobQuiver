@@ -10,10 +10,10 @@ export default abstract class JobAPI {
   abstract getItem(id:number): Promise<any>;
 
   static score(text:string, keywords:string[]):number {
-    const words = text.split(' ');
+    const words = text.toLowerCase().split(' ');
     let count = 0;
     words.forEach(w => {
-      keywords.forEach((k, i) => {
+      keywords.map(k => k.toLowerCase()).forEach((k, i) => {
         if(w.search(k) > -1) {
           count += keywords.length - i;
         }

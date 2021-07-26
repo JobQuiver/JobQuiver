@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 import JobAPI from "./api";
 
-const ITEM_COUNT = 50;
+const PAGE_COUNT = 50;
 
 /**
  * findwork.dev
@@ -19,10 +19,21 @@ const ITEM_COUNT = 50;
         const setKeywords = keywords.join();
         // make a fetch request to the api
         const url = 'https://findwork.dev/api/jobs/?search=' + keywords.reduce((str, k) => str + '+' + k, '') + '&' + locations.reduce((str, l, i) => str + 'location=' + l + (i !== locations.length - 1 ? '&': ''), '');
-        const jobs = await fetch(url, {Authorization: 'Token ' + process.env.FINDWORK_API_KEY}).then(res => res.json());
+        console.log('Requesting date from Findwork.dev: ' + url);
+        const jobs = await fetch(url, {headers: {Authorization: 'Token ' + process.env.FINDWORK_API_KEY}}).then(res => res.json());
+        console.log('Received data from Findwork.dev = ', jobs.results?.length);
         // iterate over items
+        if(!jobs.results) throw JSON.stringify(jobs);
+
+        let start = (page - 1) * PAGE_COUNT
+        let end = start + PAGE_COUNT + 1;
+        if(jobs.count < PAGE_COUNT) {
+          start = 0;
+          end = jobs.count;
+        }
+        
         const parsedJobs = [];
-        for(let i = (page - 1) * ITEM_COUNT; i < page * ITEM_COUNT - 1; i++) {
+        for(let i = start; i < end; i++) {
           const j = jobs.results[i];
           // convert format to result format and give it a score
           const job = {
@@ -34,16 +45,16 @@ const ITEM_COUNT = 50;
               keywords: setKeywords,
               apiWebsite: 'findwork.dev',
               apiId: j.id.toString(),
-              score: JobAPI.score(j.contents, keywords),
+              score: JobAPI.score(j.text, keywords),
           }
-          parsedJobs.push(jobs);
+          parsedJobs.push(job);
         };
 
         // resolve with the items
         resolve(parsedJobs);
       }
       catch(error) {
-        reject(error);
+        reject('[Findwork.dev] ' + error);
       }
     });
   }
