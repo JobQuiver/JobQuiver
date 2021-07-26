@@ -6,7 +6,6 @@
   "scripts": {
     "start": "NODE_ENV=production; webpack & ts-node server/server.ts",
     "test": "jest --verbose"
-
   },
   "repository": {
     "type": "git",
