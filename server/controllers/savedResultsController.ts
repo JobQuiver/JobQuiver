@@ -6,19 +6,31 @@ const savedResultsController = {
   // The current getSavedResults middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   getSavedResults: async (req: Request, res: Response, next: NextFunction) => {
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const getAllSavedResultsQueryParams = [userId];
-    // const getAllSavedResultsQuery = `
-    //   SELECT results.*
-    //   FROM results
-    //   JOIN users_saved_results
-    //   ON users_saved_results.user_id = ($1);
-    // `;
+    const getAllSavedResultsQueryParams = [userId];
+    const getAllSavedResultsQuery = `
+      SELECT r.*
+      FROM results
+      AS r
+      WHERE r.id
+      IN (
+        SELECT u.resultId
+        FROM users_saved_results
+        AS u
+        WHERE u.userId = ($1)
+      );
+    `;
   
     try {
-      // const savedResults = await db.query(getAllSavedResultsQuery, getAllSavedResultsQueryParams);
-      // res.locals.results = savedResults.rows;
-  
+      const savedResults = await db.query(
+        getAllSavedResultsQuery,
+        getAllSavedResultsQueryParams
+      );
+
+      res.locals.results = savedResults.rows;
       return next();
     } catch (e) {
       return next({
@@ -29,18 +41,21 @@ const savedResultsController = {
     }
   },
   getSavedResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const { id } = req.params;
-    // const getSavedResultQueryParams = [id];
-    // const getSavedResultQuery = `
-    //   SELECT *
-    //   FROM results
-    //   WHERE _id = ($1);
-    // `;
+    const { id } = req.params;
+    const getSavedResultQueryParams = [id];
+    const getSavedResultQuery = `
+      SELECT *
+      FROM results
+      WHERE id = ($1);
+    `;
   
     try {
-      // const savedResult = await db.query(getSavedResultQuery, getSavedResultQueryParams);
-      // res.locals.result = savedResult.rows[0];
-  
+      const savedResult = await db.query(
+        getSavedResultQuery,
+        getSavedResultQueryParams
+      );
+
+      res.locals.result = savedResult.rows[0];
       return next();
     } catch (e) {
       return next({
@@ -50,37 +65,76 @@ const savedResultsController = {
       })
     }
   },
-  //! saveResult middleware not complete; need to save in a joins table to join a result and a user. 
-  //! Better implementation would be check if the result already exists in the results table. 
-  // -DLA
   // The current saveResult middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   saveResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const { someData, someOtherData } = req.body;
+    const {
+      title,
+      location,
+      description,
+      link,
+      companyName,
+      apiWebsite,
+      apiId,
+    } = req.body;
+    const saveResultQueryParams = [
+      title,
+      location,
+      description,
+      link,
+      companyName,
+      apiWebsite,
+      apiId,
+    ];
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const saveResultQueryParams = [someData, someOtherData];
 
-    // const createResultQuery = `
-    //   INSERT INTO results (col1, col2)
-    //   VALUES ($1, $2)
-    //   RETURNING *;
-    // `;
+    // TODO: find a way to combine these queries. -DLA
+    const findResultQuery = `
+      SELECT * 
+      FROM results 
+      WHERE title = ($1)
+      AND location = ($2)
+      AND description = ($3)
+      AND link = ($4)
+      AND companyName = ($5)
+      AND apiWebsite = ($6)
+      AND apiId = ($7);
+    `
 
-    // const saveResultToUserQuery = `
-    //   INSERT INTO users_saved_results (user_id, result_id)
-    //   VALUES ($1, $2);
-    // `
+    const createResultQuery = `
+      INSERT INTO results (title, location, description, link, companyName, apiWebsite, apiId)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;
+    `;
+
+    const saveResultToUserQuery = `
+      INSERT INTO users_saved_results (userId, resultId)
+      VALUES ($1, $2);
+    `
 
     try {
-      // const savedResult = await db.query(createResultQuery, saveResultQueryParams);
+      let savedResult = await db.query(
+        findResultQuery,
+        saveResultQueryParams
+      );
 
-      // const result = savedResult.rows[0];
-      // const resultId = result._id;
-      // const saveResultToUserQueryParams = [userId, resultId];
+      if (!savedResult.rows.length) {
+        savedResult = await db.query(
+          createResultQuery,
+          saveResultQueryParams
+        );
+      }
 
-      // await db.query(saveResultToUserQuery, saveResultToUserQueryParams);
+      const result = savedResult.rows[0];
+      const resultId = result.id;
+      const saveResultToUserQueryParams = [userId, resultId];
 
-      // res.locals.result = result;
+      await db.query(saveResultToUserQuery, saveResultToUserQueryParams);
+
+      res.locals.result = result;
       return next();
     } catch (e) {
       return next({
@@ -90,23 +144,27 @@ const savedResultsController = {
       })
     }
   },
-  // The logic for this middleware currently is working by removing an entry from the
-  // users/results join table; it would be worth revisiting to see if we want to
-  // just remove entries from the results table also. -DLA
   // The current saveResult middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   unsaveResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const resultId = req.params.id;
+    const resultId = req.params.id;
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const unsaveResultFromUserQueryParams = [resultId, userId];
-    // const unsaveResultFromUserQuery = `
-    //   DELETE FROM users_saved_results
-    //   WHERE result_id = ($1)
-    //   AND result_id = ($2);
-    // `
+    const unsaveResultFromUserQueryParams = [resultId, userId];
+    const unsaveResultFromUserQuery = `
+      DELETE FROM users_saved_results
+      WHERE resultId = ($1)
+      AND userId = ($2);
+    `
 
     try {
-      // await db.query(unsaveResultFromUserQuery, unsaveResultFromUserQueryParams);
+      await db.query(
+        unsaveResultFromUserQuery,
+        unsaveResultFromUserQueryParams
+      );
+      
       return next();
     } catch (e) {
       return next({
