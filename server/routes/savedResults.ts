@@ -25,7 +25,7 @@ savedResultRouter.post(
   // auth?
   savedResultsController.saveResult,
   // (req: Request, res: Response) => res.status(200).send(res.locals.result)
-  (req: Request, res: Response) => res.status(200).send('POST /savedResults')
+  (req: Request, res: Response) => res.status(201).send('POST /savedResults')
 );
 
 savedResultRouter.delete(
@@ -33,7 +33,7 @@ savedResultRouter.delete(
   // auth?
   savedResultsController.unsaveResult,
   (req: Request, res: Response) => res.status(200).send('DELETE /savedResults')
-  // (req: Request, res: Response) => res.sendStatus(200)
+  // (req: Request, res: Response) => res.sendStatus(204)
 );
 
 export default savedResultRouter;

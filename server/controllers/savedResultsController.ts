@@ -2,8 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 
 import db from '../models/resultModel';
 
-// TODO: update status codes. -DLA
-
 const savedResultsController = {
   // The current getSavedResults middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA

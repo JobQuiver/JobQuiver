@@ -19,7 +19,6 @@ const app: Application = express();
 
 app.use(json());
 
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 }
