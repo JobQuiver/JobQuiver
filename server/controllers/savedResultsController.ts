@@ -25,9 +25,12 @@ const savedResultsController = {
     `;
   
     try {
-      const savedResults = await db.query(getAllSavedResultsQuery, getAllSavedResultsQueryParams);
-      res.locals.results = savedResults.rows;
+      const savedResults = await db.query(
+        getAllSavedResultsQuery,
+        getAllSavedResultsQueryParams
+      );
 
+      res.locals.results = savedResults.rows;
       return next();
     } catch (e) {
       return next({
@@ -38,18 +41,21 @@ const savedResultsController = {
     }
   },
   getSavedResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const { id } = req.params;
-    // const getSavedResultQueryParams = [id];
-    // const getSavedResultQuery = `
-    //   SELECT *
-    //   FROM results
-    //   WHERE _id = ($1);
-    // `;
+    const { id } = req.params;
+    const getSavedResultQueryParams = [id];
+    const getSavedResultQuery = `
+      SELECT *
+      FROM results
+      WHERE id = ($1);
+    `;
   
     try {
-      // const savedResult = await db.query(getSavedResultQuery, getSavedResultQueryParams);
-      // res.locals.result = savedResult.rows[0];
-  
+      const savedResult = await db.query(
+        getSavedResultQuery,
+        getSavedResultQueryParams
+      );
+
+      res.locals.result = savedResult.rows[0];
       return next();
     } catch (e) {
       return next({

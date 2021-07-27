@@ -15,8 +15,8 @@ savedResultRouter.get(
   '/:id',
   // auth?
   savedResultsController.getSavedResult,
-  // (req: Request, res: Response) => res.status(200).send(res.locals.results)
-  (req: Request, res: Response) => res.status(200).send('GET /savedResults/:id')
+  (req: Request, res: Response) => res.status(200).send(res.locals.result)
+  // (req: Request, res: Response) => res.status(200).send('GET /savedResults/:id')
 );
 
 savedResultRouter.post(
