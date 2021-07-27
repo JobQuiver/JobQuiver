@@ -6,19 +6,28 @@ const savedResultsController = {
   // The current getSavedResults middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   getSavedResults: async (req: Request, res: Response, next: NextFunction) => {
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const getAllSavedResultsQueryParams = [userId];
-    // const getAllSavedResultsQuery = `
-    //   SELECT results.*
-    //   FROM results
-    //   JOIN users_saved_results
-    //   ON users_saved_results.user_id = ($1);
-    // `;
+    const getAllSavedResultsQueryParams = [userId];
+    const getAllSavedResultsQuery = `
+      SELECT r.*
+      FROM results
+      AS r
+      WHERE r.id
+      IN (
+        SELECT u.resultId
+        FROM users_saved_results
+        AS u
+        WHERE u.userId = ($1)
+      );
+    `;
   
     try {
-      // const savedResults = await db.query(getAllSavedResultsQuery, getAllSavedResultsQueryParams);
-      // res.locals.results = savedResults.rows;
-  
+      const savedResults = await db.query(getAllSavedResultsQuery, getAllSavedResultsQueryParams);
+      res.locals.results = savedResults.rows;
+
       return next();
     } catch (e) {
       return next({

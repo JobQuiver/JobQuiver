@@ -8,8 +8,7 @@ savedResultRouter.get(
   '/',
   // auth?
   savedResultsController.getSavedResults,
-  // (req: Request, res: Response) => res.status(200).send(res.locals.results)
-  (req: Request, res: Response) => res.status(200).send('GET /savedResults')
+  (req: Request, res: Response) => res.status(200).send(res.locals.results)
 );
 
 savedResultRouter.get(
