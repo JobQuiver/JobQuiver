@@ -1,17 +1,25 @@
-// import React, {FC} from "react"; 
-// import { render } from "react-dom";
+import React, { FC } from 'react';
 
-// import SearchResult from "./SearchResult"; 
+import SearchResult from './SearchResult';
 
-// const SearchPage: FC<any> = (props: any) => {
+const AllSearchResults: FC<any> = props => {
+  return (
+    <div>
+      {props.state.map(
+        ({ CompanyName, Description, Position, ExperienceLevel }, i) => {
+          return (
+            <SearchResult
+              key={[i]}
+              CompanyName={CompanyName}
+              Description={Description}
+              Position={Position}
+              ExperienceLevel={ExperienceLevel}
+            />
+          );
+        }
+      )}
+    </div>
+  );
+};
 
-// //create a new search result component for each result we get back from the api, loop through response object
-
-//   return (
-//     <div>
-//       <SearchResult />
-//     </div>
-//   )
-// }
-
-// export default SearchPage; 
+export default AllSearchResults;
