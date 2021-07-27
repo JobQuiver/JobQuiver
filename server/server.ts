@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 }
 
+app.use('/login');
 app.use('/search', searchRouter);
 app.use('/savedResults', savedResultsRouter);
 
