@@ -29,8 +29,7 @@ savedResultRouter.delete(
   '/:id',
   // auth?
   savedResultsController.unsaveResult,
-  (req: Request, res: Response) => res.status(200).send('DELETE /savedResults')
-  // (req: Request, res: Response) => res.sendStatus(204)
+  (req: Request, res: Response) => res.sendStatus(204)
 );
 
 export default savedResultRouter;

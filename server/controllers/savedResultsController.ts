@@ -138,23 +138,23 @@ const savedResultsController = {
       })
     }
   },
-  // The logic for this middleware currently is working by removing an entry from the
-  // users/results join table; it would be worth revisiting to see if we want to
-  // just remove entries from the results table also. -DLA
   // The current saveResult middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   unsaveResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const resultId = req.params.id;
+    const resultId = req.params.id;
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const unsaveResultFromUserQueryParams = [resultId, userId];
-    // const unsaveResultFromUserQuery = `
-    //   DELETE FROM users_saved_results
-    //   WHERE result_id = ($1)
-    //   AND result_id = ($2);
-    // `
+    const unsaveResultFromUserQueryParams = [resultId, userId];
+    const unsaveResultFromUserQuery = `
+      DELETE FROM users_saved_results
+      WHERE resultId = ($1)
+      AND userId = ($2);
+    `
 
     try {
-      // await db.query(unsaveResultFromUserQuery, unsaveResultFromUserQueryParams);
+      await db.query(unsaveResultFromUserQuery, unsaveResultFromUserQueryParams);
       return next();
     } catch (e) {
       return next({
