@@ -101,13 +101,13 @@ const savedResultsController = {
       AND link = ($4)
       AND companyName = ($5)
       AND apiWebsite = ($6)
-      AND apiId = ($7)
+      AND apiId = ($7);
     `
 
     const createResultQuery = `
       INSERT INTO results (title, location, description, link, companyName, apiWebsite, apiId)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *
+      RETURNING *;
     `;
 
     const saveResultToUserQuery = `
@@ -116,10 +116,16 @@ const savedResultsController = {
     `
 
     try {
-      let savedResult = await db.query(findResultQuery, saveResultQueryParams);
+      let savedResult = await db.query(
+        findResultQuery,
+        saveResultQueryParams
+      );
 
       if (!savedResult.rows.length) {
-        savedResult = await db.query(createResultQuery, saveResultQueryParams);
+        savedResult = await db.query(
+          createResultQuery,
+          saveResultQueryParams
+        );
       }
 
       const result = savedResult.rows[0];
@@ -154,7 +160,11 @@ const savedResultsController = {
     `
 
     try {
-      await db.query(unsaveResultFromUserQuery, unsaveResultFromUserQueryParams);
+      await db.query(
+        unsaveResultFromUserQuery,
+        unsaveResultFromUserQueryParams
+      );
+      
       return next();
     } catch (e) {
       return next({
