@@ -1,39 +1,45 @@
-require('dotenv').config();
-const express = require('express');
-const path = require ('path');
-const https = require('https');
-const fs = require('fs');
+import express, {
+  Application, 
+  Request,
+  Response,
+  NextFunction,
+  json,
+  urlencoded,
+} from 'express';
+import path from 'path';
+import { config } from 'dotenv';
+// import https from 'https';
+// import fs from 'fs';
+
+import searchRouter from './routes/search';
+import savedResultsRouter from './routes/savedResults';
+
+config();
 
 const PORT = process.env.APP_PORT;
-const app = express();
+const app: Application = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
-app.get('/', (req, res)=>{
-  res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../dist')));
+}
 
-app.get('/dist/bundle.js', (req, res)=>{
-  res.status(200).sendFile(path.join(__dirname, '../dist/bundle.js'));
-});
-
-// routes
-import searchRouter from './routes/search';
 app.use('/search', searchRouter);
+app.use('/savedResults', savedResultsRouter);
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).send('Cannot find ' + req.baseUrl);
+app.use('*', (req: Request, res: Response) => (
+  res.status(404).send('Cannot find ' + req.baseUrl)
+));
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  const { status, log, message } = err;
+  console.log(err.log || 'Error: unknown error occurred');
+
+  return res.status(status || 500).send(message || 'An error occurred.');
 });
 
-// global error handler
-app.use((err, req, res, next) => {
-  console.log((err.log || 'Error: unknown error occured'));
-  res.status(err.status || 500).send(err.message || 'unknown error');
-});
-
-// start server
 app.listen(PORT, () => {
-  console.log(`Listening to PORT ${PORT}...`);
+  console.log(`Listening to port ${PORT}...`);
 });

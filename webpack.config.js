@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack'); 
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
+  mode: process.env.NODE_ENV,
   devtool: 'inline-source-map',
   entry: './client/index.tsx',
   output: {
@@ -38,14 +38,13 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   devServer: {
-    port: 3000,
-    contentBase: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    port: 8080,
+    hot: true,
+    publicPath: '/',
     proxy: {
-      '/': 'http://localhost:3000',
+      '/**': 'http://localhost:3000',
     },
     compress: true,
-    hot: true,
     historyApiFallback: true,
   },
 };
