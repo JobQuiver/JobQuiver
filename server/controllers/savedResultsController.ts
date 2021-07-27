@@ -91,10 +91,23 @@ const savedResultsController = {
     const userId = 1;
     // const { userId } = res.locals;
 
+    // TODO: find a way to combine these queries. -DLA
+    const findResultQuery = `
+      SELECT * 
+      FROM results 
+      WHERE title = ($1)
+      AND location = ($2)
+      AND description = ($3)
+      AND link = ($4)
+      AND companyName = ($5)
+      AND apiWebsite = ($6)
+      AND apiId = ($7)
+    `
+
     const createResultQuery = `
       INSERT INTO results (title, location, description, link, companyName, apiWebsite, apiId)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *;
+      RETURNING *
     `;
 
     const saveResultToUserQuery = `
@@ -103,7 +116,11 @@ const savedResultsController = {
     `
 
     try {
-      const savedResult = await db.query(createResultQuery, saveResultQueryParams);
+      let savedResult = await db.query(findResultQuery, saveResultQueryParams);
+
+      if (!savedResult.rows.length) {
+        savedResult = await db.query(createResultQuery, saveResultQueryParams);
+      }
 
       const result = savedResult.rows[0];
       const resultId = result.id;
