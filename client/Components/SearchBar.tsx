@@ -6,17 +6,19 @@ const SearchBar: FC<any> = (props: any) => {
   //create logic for enter keydown event
 
   const [results, setResults] = useState<any[]>([]);
+  const [search, setSearch] = useState<string>('');
 
   const getSearchResults = () => {
-    fetch('/TBD')
+    fetch('/search')
       .then(response => response.json())
       .then(data => {
         setResults(data);
       });
   };
+
   return (
     <div>
-      <input type="search">Search Job Postings</input>
+      <input type="search" className="SearchBar" />
       <button type="button" onClick={() => getSearchResults()}>
         Search
       </button>

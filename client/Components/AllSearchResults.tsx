@@ -1,25 +1,25 @@
 import React, { FC } from 'react';
-
 import SearchResult from './SearchResult';
 
-const AllSearchResults: FC<any> = props => {
-  return (
-    <div>
-      {props.state.map(
-        ({ CompanyName, Description, Position, ExperienceLevel }, i) => {
-          return (
-            <SearchResult
-              key={[i]}
-              CompanyName={CompanyName}
-              Description={Description}
-              Position={Position}
-              ExperienceLevel={ExperienceLevel}
-            />
-          );
-        }
-      )}
-    </div>
-  );
+const AllSearchResults: FC<any> = (props: any) => {
+  let searchResultArray = [];
+  if (props.state) {
+    // console.log('props.state', props.state);
+    props.state.forEach((object, i) => {
+      searchResultArray.push(
+        <SearchResult
+          key={i++}
+          companyName={object.companyName}
+          title={object.title}
+          description={object.description}
+          location={object.location.name}
+          link={object.link}
+        />
+      );
+    });
+  }
+
+  return <div>{searchResultArray}</div>;
 };
 
 export default AllSearchResults;
