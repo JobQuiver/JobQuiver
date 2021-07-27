@@ -65,37 +65,53 @@ const savedResultsController = {
       })
     }
   },
-  //! saveResult middleware not complete; need to save in a joins table to join a result and a user. 
-  //! Better implementation would be check if the result already exists in the results table. 
-  // -DLA
   // The current saveResult middleware assumes that a userId will be provided
   // via the authMiddleware. -DLA
   saveResult: async (req: Request, res: Response, next: NextFunction) => {
-    // const { someData, someOtherData } = req.body;
+    const {
+      title,
+      location,
+      description,
+      link,
+      companyName,
+      apiWebsite,
+      apiId,
+    } = req.body;
+    const saveResultQueryParams = [
+      title,
+      location,
+      description,
+      link,
+      companyName,
+      apiWebsite,
+      apiId,
+    ];
+    //! for testing purposes, the userId is being hardcoded to 1. 
+    //! To be changed once auth middleware is integrated in. 
+    const userId = 1;
     // const { userId } = res.locals;
-    // const saveResultQueryParams = [someData, someOtherData];
 
-    // const createResultQuery = `
-    //   INSERT INTO results (col1, col2)
-    //   VALUES ($1, $2)
-    //   RETURNING *;
-    // `;
+    const createResultQuery = `
+      INSERT INTO results (title, location, description, link, companyName, apiWebsite, apiId)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;
+    `;
 
-    // const saveResultToUserQuery = `
-    //   INSERT INTO users_saved_results (user_id, result_id)
-    //   VALUES ($1, $2);
-    // `
+    const saveResultToUserQuery = `
+      INSERT INTO users_saved_results (userId, resultId)
+      VALUES ($1, $2);
+    `
 
     try {
-      // const savedResult = await db.query(createResultQuery, saveResultQueryParams);
+      const savedResult = await db.query(createResultQuery, saveResultQueryParams);
 
-      // const result = savedResult.rows[0];
-      // const resultId = result._id;
-      // const saveResultToUserQueryParams = [userId, resultId];
+      const result = savedResult.rows[0];
+      const resultId = result.id;
+      const saveResultToUserQueryParams = [userId, resultId];
 
-      // await db.query(saveResultToUserQuery, saveResultToUserQueryParams);
+      await db.query(saveResultToUserQuery, saveResultToUserQueryParams);
 
-      // res.locals.result = result;
+      res.locals.result = result;
       return next();
     } catch (e) {
       return next({

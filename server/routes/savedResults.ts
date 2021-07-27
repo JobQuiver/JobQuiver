@@ -16,15 +16,13 @@ savedResultRouter.get(
   // auth?
   savedResultsController.getSavedResult,
   (req: Request, res: Response) => res.status(200).send(res.locals.result)
-  // (req: Request, res: Response) => res.status(200).send('GET /savedResults/:id')
 );
 
 savedResultRouter.post(
   '/',
   // auth?
   savedResultsController.saveResult,
-  // (req: Request, res: Response) => res.status(200).send(res.locals.result)
-  (req: Request, res: Response) => res.status(201).send('POST /savedResults')
+  (req: Request, res: Response) => res.status(200).send(res.locals.result)
 );
 
 savedResultRouter.delete(
