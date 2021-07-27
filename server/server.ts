@@ -11,6 +11,7 @@ import { config } from 'dotenv';
 // import fs from 'fs';
 
 import savedResultsRouter from './routes/savedResults';
+import searchRouter from './routes/search';
 
 config();
 
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/savedResults', savedResultsRouter);
+app.use('/search', searchRouter);
 
 app.use('*', (req: Request, res: Response) => (
   res.status(404).send('Cannot find ' + req.baseUrl)
