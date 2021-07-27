@@ -7,7 +7,7 @@ import {
   Switch,
   Link,
   Redirect,
-} from "react-router";
+} from "react-router-dom";
 
 const Signup: FC<any> = () => {
   const [username, setUsername] = useState<string>('');

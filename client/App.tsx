@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { render } from 'react-dom';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Link,
   Redirect,
-} from 'react-router';
+} from 'react-router-dom';
 import Login from './Routes/Login';
 import Signup from './Routes/Signup';
 import SearchPage from './Routes/SearchPage';
