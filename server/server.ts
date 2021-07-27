@@ -11,6 +11,7 @@ import { config } from 'dotenv';
 // import https from 'https';
 // import fs from 'fs';
 
+import loginRouter from './routes/login';
 import searchRouter from './routes/search';
 import savedResultsRouter from './routes/savedResults';
 
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 }
 
+app.use('/login', loginRouter);
 app.use('/search', searchRouter);
 app.use('/savedResults', savedResultsRouter);
 
