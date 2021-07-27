@@ -1,21 +1,17 @@
 import React, { FC, useState } from 'react';
-import { render } from 'react-dom';
-import SearchResults from './SearchResults';
 import AllSearchResults from './AllSearchResults';
 
 const SearchBar: FC<any> = (props: any) => {
   //create logic for search button
   //create logic for enter keydown event
 
-  const [results, setResults] = useState<object>([]);
+  const [results, setResults] = useState<any[]>([]);
 
   const getSearchResults = () => {
-    fetch('/postings')
+    fetch('/TBD')
       .then(response => response.json())
       .then(data => {
-        data.forEach(responseObject => {
-          setResults(results.push(responseObject));
-        });
+        setResults(data);
       });
   };
   return (
