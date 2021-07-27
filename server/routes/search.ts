@@ -14,5 +14,8 @@ searchRouter.get('/', searchController.search, (req, res) =>{
   res.status(200).json(res.locals);
 });
 
+searchRouter.get('/:api/:id', searchController.getItem, (req, res) => {
+  res.status(200).json(res.locals);
+});
 
 export default searchRouter;

@@ -27,7 +27,22 @@ const searchController = {
         message: 'Server error, check the logs',
       });
     }
-  }
+  },
+  getItem: async (req, res, next) => {
+    try {
+      const { id, api } = req.params;
+      if(typeof(id) !== 'string' || Number(id) < 0) return next({ message:'Illegal id request: ' + id, status:401, log:'User error in get item request' });
+      if(typeof(api) !== 'string' || JobAPI.list[api] === undefined) return next({ message:'Illegal api request: ' + api, status:401, log:'User error in get item request' });
+      res.locals = await JobAPI.list[api].getItem(id);
+      return next();
+    }
+    catch(error) {
+      return next({
+        log: 'Error in searchController.search: ' + error,
+        message: 'Server error, check the logs',
+      });
+    }
+  },
 }
 
 export default searchController;

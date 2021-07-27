@@ -47,10 +47,25 @@ export default class MuseAPI extends JobAPI {
     });
   }
 
-  // needs implementation
-  getItem(id:number) {
-    return new Promise((resolve, reject) => {
-      resolve(true);
+  getItem(id:string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const url = 'https://www.themuse.com/api/public/jobs/' + id;
+        const job = await fetch(url).then(res => res.json());
+        if(job.error) throw JSON.stringify(job);
+        resolve({
+          title: job.name,
+          location: job.locations[0],
+          description: job.contents,
+          link: job.refs.landing_page,
+          companyName: job.company.name,
+          apiWebsite: 'muse',
+          apiId: job.id.toString(),
+        });
+      }
+      catch(error) {
+        reject('[Muse] ' + error);
+      }
     });
   }
 }

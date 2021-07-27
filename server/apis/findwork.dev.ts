@@ -59,10 +59,25 @@ const PAGE_COUNT = 50;
     });
   }
 
-  // needs implementation
-  getItem(id:number) {
-    return new Promise((resolve, reject) => {
-      resolve(true);
+  getItem(id:string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const url = 'https://findwork.dev/api/jobs/' + id;
+        const job = await fetch(url, {headers: {Authorization: 'Token ' + process.env.FINDWORK_API_KEY}}).then(res => res.json());
+        if(job.detail) throw JSON.stringify(job);
+        resolve({
+          title: job.role,
+          location: job.location,
+          description: job.text,
+          link: job.url,
+          companyName: job.company_name,
+          apiWebsite: 'findwork.dev',
+          apiId: job.id.toString(),
+      });
+      }
+      catch(error) {
+        reject('[Findwork.dev] ' + error);
+      }
     });
   }
 }

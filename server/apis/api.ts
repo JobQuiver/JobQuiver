@@ -7,7 +7,7 @@ export default abstract class JobAPI {
   }
 
   abstract search(page:number, locations:string[], keywords:string[]): Promise<any>;
-  abstract getItem(id:number): Promise<any>;
+  abstract getItem(id:string): Promise<any>;
 
   static score(text:string, keywords:string[]):number {
     const words = text.toLowerCase().split(' ');
