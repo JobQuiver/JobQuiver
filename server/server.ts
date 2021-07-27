@@ -1,34 +1,42 @@
-require('dotenv').config();
-const express = require('express');
-const path = require ('path');
-const https = require('https');
-const fs = require('fs');
+import express, {
+  Application, 
+  Request,
+  Response,
+  NextFunction,
+  json,
+} from 'express';
+import path from 'path';
+import { config } from 'dotenv';
+// import https from 'https';
+// import fs from 'fs';
+
+import savedResultsRouter from './routes/savedResults';
+
+config();
 
 const PORT = process.env.APP_PORT;
-const app = express();
+const app: Application = express();
 
-app.use(express.json());
+app.use(json());
 
-app.get('/', (req, res)=>{
-  res.status(200).sendFile(path.join(__dirname, '../index.html'));
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../dist')));
+}
+
+app.use('/savedResults', savedResultsRouter);
+
+app.use('*', (req: Request, res: Response) => (
+  res.status(404).send('Cannot find ' + req.baseUrl)
+));
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  const { status, log, message } = err;
+  console.log('Error: ' + (log || 'unknown error occurred.'));
+
+  return res.status(status || 500).send(message || 'An error occurred.');
 });
 
-app.get('/dist/bundle.js', (req, res)=>{
-  res.status(200).sendFile(path.join(__dirname, '../dist/bundle.js'));
-});
-
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).send('Cannot find ' + req.baseUrl);
-});
-
-// global error handler
-app.use((err, req, res, next) => {
-  console.log('Error: ' + (err.log || 'unknown error occured'));
-  res.status(err.status || 500).send(err.message || 'unknown error');
-});
-
-// start server
 app.listen(PORT, () => {
-  console.log(`Listening to PORT ${PORT}...`);
+  console.log(`Listening to port ${PORT}...`);
 });
