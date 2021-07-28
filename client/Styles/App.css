@@ -16,7 +16,6 @@ html{
 } 
 
 .Header {
-  position: fixed;
   width: 100vw;
   padding: 1rem;
   align-items: center;
@@ -59,8 +58,12 @@ html{
   border-bottom: 1px solid #b5b5b5;
   margin: 0rem 15rem;
   padding: 2rem 0rem;
+}
+
+.description-container {
   overflow: hidden;
   max-height: 170px;
+  margin: 18px 0;
 }
 
 /* .SearchResult:first-child {
