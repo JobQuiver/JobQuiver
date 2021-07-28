@@ -1,27 +1,37 @@
-// import React, { FC } from 'react';
+import React, { FC } from 'react';
 
-// const PreviousSearch: FC<any> = (props: any) => {
-//   const DeletePost = () => {
-//     fetch('/TBD', {
-//       method: 'DELETE',
-//       headers: { 'Content-Type': 'application/json' },
-//       // body: json.stringify({})
-//     });
-//   };
-//   return (
-//     <div>
-//       <div className="PreviousSearch">
-//         <p className="SavedName"></p>
-//         <p className="CompanyName"></p>
-//         <p className="Description"></p>
-//         <p className="Position"></p>
-//         <p className="ExperienceLevel"></p>
-//       </div>
-//       <button type="button" onClick={() => DeletePost()}>
-//         Delete Posting
-//       </button>
-//     </div>
-//   );
-// };
+// TODO: update deletepost type
+interface PreviousSearchProps {
+  title: string,
+  location: string,
+  description: string,
+  link: string,
+  companyName: string,
+  id: number,
+  deletePost: any,
+};
 
-// export default PreviousSearch;
+const PreviousSearch: FC<PreviousSearchProps> = ({
+  title,
+  location,
+  description,
+  link,
+  companyName,
+  id,
+  deletePost,
+}: PreviousSearchProps) => (
+  <div id={id.toString()}>
+    <div className="PreviousSearch">
+      <p className="SavedName">{title}</p>
+      <p className="CompanyName">{companyName}</p>
+      <p className="Description">{description}</p>
+      <p className="Location">{location}</p>
+      <p className="Link">{link}</p>
+    </div>
+    <button type="button" onClick={deletePost}>
+      Delete Post
+    </button>
+  </div>
+);
+
+export default PreviousSearch;
