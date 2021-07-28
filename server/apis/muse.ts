@@ -1,22 +1,26 @@
 const fetch = require('node-fetch');
-import JobAPI from "./api";
+import JobAPI from './api';
+import * as Types from './api';
 
 /**
  * The Muse
  * Docs: https://www.themuse.com/developers/api/v2
  * Request URL: https://www.themuse.com/api/public/jobs
+ * 
+ * levels: ['Entry%20Level', 'Mid%20Level', 'Senior%20Level', 'management', 'Internship']
  */
 export default class MuseAPI extends JobAPI {
   constructor() {
     super('muse');
   }
 
-  search(page:number, locations:string[], keywords:string[]) {
+  search(page:number, {locations, keywords, level}:Types.SearchOptions) {
     return new Promise(async (resolve, reject) => {
       try {
         const setKeywords = keywords.join();
         // make a fetch request to the api
-        const url = 'https://www.themuse.com/api/public/jobs?category=Software%20Engineer&' + locations.reduce((str, l) => str + 'location=' + l + '&', '') + 'page=' + page;
+        if(level === undefined) level = '';
+        const url = 'https://www.themuse.com/api/public/jobs?category=Software%20Engineer&' + locations.reduce((str, l) => str + 'location=' + l + '&', '') + 'level=' + level + '&page=' + page;
         console.log('Requesting date from Muse: ' + url);
         const jobs = await fetch(url).then(res => res.json());
         console.log('Received data from Muse = ', jobs.results?.length);

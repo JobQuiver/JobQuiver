@@ -1,3 +1,11 @@
+interface SearchOptions {
+  locations:string[],
+  keywords:string[],
+  level?:string
+}
+
+export { SearchOptions };
+
 export default abstract class JobAPI {
   constructor(name:string) {
     if(Object.keys(JobAPI.list).includes(name)) {
@@ -6,7 +14,7 @@ export default abstract class JobAPI {
     JobAPI.list[name] = this;
   }
 
-  abstract search(page:number, locations:string[], keywords:string[]): Promise<any>;
+  abstract search(page:number, options: SearchOptions): Promise<any>;
   abstract getItem(id:string): Promise<any>;
 
   static score(text:string, keywords:string[]):number {
