@@ -15,43 +15,47 @@ html{
   text-rendering: optimizeLegibility;
 } 
 
-.SearchPageContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.FiltersContainer {
-  display: flex; 
-  flex-direction: column;
-}
-
-.SearchBar-Container {
-  background-color: green;
-  margin: 1rem 15rem;
-  display: flex;
-  justify-content: space-between;
-}
-
 .InputsContainer {
   display: flex;
-  background-color: blue;
   margin: .5rem 15rem;
   justify-content: space-between;
+} 
+
+.searchbarbutton {
+  width: 7rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.savedsearches {
+  width: 10rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.searchfields {
+  color: green;
+  width: 25%;
+  height: 1.5rem;
+  border: 1px solid gray;
+  margin: 2rem 0rem 1rem 0rem;
 }
 
 .SearchResult {
-  background-color: #f3f3f3;
-  border-radius: 10px;
-  border-bottom: 5px solid #f3f3f3;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
-  margin: 1rem 15rem;
-  padding: 1rem;
+  border-bottom: 1px solid grey;
+  border-bottom: 1px solid grey;
+  margin: 2rem 15rem;
+  padding: 2rem 0rem;
   overflow: hidden;
   max-height: 150px;
 }
 
+.SearchResult:first-child {
+  border-top: 1px solid grey;
+}
+
 .SearchResult:hover {
-  border-bottom: 5px solid royalblue;
+  background-color: grey;
 }
 
 .SearchResult p {
@@ -68,22 +72,25 @@ html{
   color: green; 
 }
 
-.TitleAndSave {
+.TitleAndButtons {
   display: flex;
   justify-content: space-between;
 }
 
-.SaveButton {
-  background-color: white;
+.SaveButton, 
+.ExpandButton {
+  background-color: #fff;
   padding: .25rem .9rem;
   border-radius: 10px;
-  color: black;
+  color: #000;
   font-size: .65rem;
   font: red;
   border: 1px solid orange;
+  margin: 0rem .25rem;
 }
 
-.SaveButton:hover {
+.SaveButton:hover,
+.ExpandButton:hover {
   cursor: pointer;
   color: red; 
   font: blue; 

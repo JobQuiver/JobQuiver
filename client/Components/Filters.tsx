@@ -3,13 +3,11 @@ import React, { FC, useState } from 'react';
 const Filters: FC<any> = (props: any) => {
   const [experience, setExperience] = useState<string>('');
   const [location, setLocation] = useState<string>('');
-  const [salary, setSalary] = useState<string>('');
   const [keyword, setKeyword] = useState<string>('');
 
   const labelToSetState = {
     experience: setExperience,
     location: setLocation,
-    salary: setSalary,
     keyword: setKeyword,
   };
 
@@ -26,7 +24,6 @@ const Filters: FC<any> = (props: any) => {
     const criteria = {
       experience,
       location,
-      salary,
     };
   };
 
@@ -34,7 +31,7 @@ const Filters: FC<any> = (props: any) => {
     const query = `?page=1&locations=${location.replace(
       /\s/g,
       '%20'
-    )}&keywords=${keyword}`;
+    )}&keywords=${keyword}&level=${experience}`;
     console.log('query', query);
     fetch(`/search${query}`, {
       method: 'GET',
@@ -45,49 +42,51 @@ const Filters: FC<any> = (props: any) => {
 
   return (
     <div className="FiltersContainer">
-      <div className="SearchBar-Container">
-        <input
-          type="search"
-          className="SearchBar"
-          name="keyword"
-          onChange={handleChange}
-        />
-        <button type="button" onClick={() => getResults()}>
-          Search
-        </button>
-      </div>
-      <div>
-        <label>
-          <form onSubmit={handleSubmit} className="InputsContainer">
-            <select
-              id="experience"
-              name="experience"
-              onChange={handleChange}
-              className="Filters"
-            >
-              <option selected>Experience Level</option>
-              <option value="Entry">Entry</option>
-              <option value="Mid">Mid</option>
-              <option value="Senior">Senior</option>
-            </select>
-            <input
-              className="searchFields"
-              type="text"
-              name="location"
-              placeholder="location"
-              onChange={handleChange}
-            />
-            <input
-              className="searchFields"
-              type="text"
-              id="name"
-              name="salary"
-              placeholder="Minimum Salary"
-              onChange={handleChange}
-            />
-          </form>
-        </label>
-      </div>
+      <label>
+        <form onSubmit={handleSubmit} className="InputsContainer">
+          <input
+            type="search"
+            className="searchfields"
+            name="keyword"
+            placeholder="Keyword"
+            onChange={handleChange}
+          />
+          <select
+            id="experience"
+            name="experience"
+            onChange={handleChange}
+            className="searchfields"
+          >
+            <option selected>Experience Level</option>
+            <option value="Internship">Internship</option>
+            <option value="Entry%20Level">Entry</option>
+            <option value="Mid%20Level">Mid</option>
+            <option value="Senior%20Level">Senior</option>
+            <option value="management">Management</option>
+          </select>
+          <input
+            className="searchFields"
+            type="text"
+            name="location"
+            placeholder="Location"
+            onChange={handleChange}
+          />
+          <button
+            className="searchbarbutton"
+            type="button"
+            onClick={() => getResults()}
+          >
+            Search
+          </button>
+          <button
+            className="savedsearches"
+            type="button"
+            // onClick={() => getResults()}
+          >
+            My Saved Searches
+          </button>
+        </form>
+      </label>
     </div>
   );
 };
