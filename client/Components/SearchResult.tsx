@@ -8,10 +8,11 @@ const SearchResult: FC<any> = (props: any) => (
     <div className="SearchResult">
       <div className="TitleAndSave">
         <p className="companyName">{props.companyName}</p>
-        <SaveButton {...props}/>
+        <button className="ExpandButton">expand +</button>
+        <SaveButton {...props} />
       </div>
       <p className="title">{props.title}</p>
-      <Description description={props.description}/>
+      <Description description={props.description} />
       <p className="location">{props.location}</p>
       <p>
         {'See original posting '}

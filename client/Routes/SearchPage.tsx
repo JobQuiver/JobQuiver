@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import Header from '../Components/Header';
 import Filters from '../Components/Filters';
 import AllSearchResults from '../Components/AllSearchResults';
 
@@ -7,6 +8,7 @@ const SearchPage: FC<any> = (props: any) => {
 
   return (
     <div className="SearchPageContainer">
+      <Header />
       <Filters setResults={setResults} />
       <AllSearchResults state={results} />
     </div>
