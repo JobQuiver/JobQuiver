@@ -8,6 +8,7 @@ import express, {
 } from 'express';
 import path from 'path';
 import { config } from 'dotenv';
+import cookieParser = require('cookie-parser');
 // import https from 'https';
 // import fs from 'fs';
 
@@ -22,6 +23,7 @@ const app: Application = express();
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
