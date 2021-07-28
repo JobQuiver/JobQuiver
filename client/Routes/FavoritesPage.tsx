@@ -5,7 +5,7 @@ const MY_SAVED_RESULTS = 'My Saved Results';
 const SAVED_RESULTS_ROUTE = '/savedResults';
 const ERROR_TEXT = 'An error has occurred. Please refresh and try again.'
 
-interface SavedResults {
+interface SavedResult {
   title: string,
   location: string,
   description: string,
@@ -17,7 +17,7 @@ interface SavedResults {
 };
 
 const FavoritesPage: FC<any> = () => {
-  const [savedResults, setSavedResults] = useState<SavedResults[]>([]);
+  const [savedResults, setSavedResults] = useState<SavedResult[]>([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const FavoritesPage: FC<any> = () => {
   }, []);
 
   // TODO: update event type. 
-  const deletePost = (e) => {
+  const deletePost = e => {
     const { id } = e.target;
 
     fetch(`/savedResults/${id}`, {
@@ -40,7 +40,10 @@ const FavoritesPage: FC<any> = () => {
         'Content-Type': 'application/json',
       }
     }).then(() => {
-      const updatedSavedResults = savedResults.filter(result => result.id !== Number(id));
+      const updatedSavedResults: SavedResult[] = savedResults.filter(result => (
+        result.id !== Number(id)
+      ));
+
       setSavedResults(updatedSavedResults);
     }).catch((err) => {
       console.log(`An error has occurred in the FavoritesPage component while un-saving a result: ${err}`);
