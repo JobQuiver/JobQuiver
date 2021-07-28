@@ -15,6 +15,20 @@ html{
   text-rendering: optimizeLegibility;
 } 
 
+.Header {
+  position: fixed;
+  width: 100vw;
+  padding: 1rem;
+  align-items: center;
+  background-color: green;
+  height: 5rem;
+  color: #fff;
+}
+
+.HeaderShadow {
+    box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+}
+
 .InputsContainer {
   display: flex;
   margin: .5rem 15rem;
@@ -42,20 +56,19 @@ html{
 }
 
 .SearchResult {
-  border-bottom: 1px solid grey;
-  border-bottom: 1px solid grey;
-  margin: 2rem 15rem;
+  border-bottom: 1px solid #b5b5b5;
+  margin: 0rem 15rem;
   padding: 2rem 0rem;
   overflow: hidden;
-  max-height: 150px;
+  max-height: 170px;
 }
 
-.SearchResult:first-child {
+/* .SearchResult:first-child {
   border-top: 1px solid grey;
-}
+} */
 
 .SearchResult:hover {
-  background-color: grey;
+  background-color: rgb(243, 243, 243);
 }
 
 .SearchResult p {
