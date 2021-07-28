@@ -20,7 +20,7 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
   id,
   deletePost,
 }: PreviousSearchProps) => (
-  <div id={id.toString()}>
+  <div>
     <div className="PreviousSearch">
       <p className="SavedName">{title}</p>
       <p className="CompanyName">{companyName}</p>
@@ -28,7 +28,11 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
       <p className="Location">{location}</p>
       <p className="Link">{link}</p>
     </div>
-    <button type="button" onClick={deletePost}>
+    <button
+      id={id.toString()}
+      type="button"
+      onClick={deletePost}
+    >
       Delete Post
     </button>
   </div>

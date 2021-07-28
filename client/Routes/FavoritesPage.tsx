@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import PreviousSearches from '../Components/PreviousSearches';
 
 const MY_SAVED_RESULTS = 'My Saved Results';
@@ -13,6 +13,7 @@ interface SavedResults {
   companyName: string,
   apiWebsite: string,
   apiId: number,
+  id: number,
 };
 
 const FavoritesPage: FC<any> = () => {
@@ -29,11 +30,31 @@ const FavoritesPage: FC<any> = () => {
       });
   }, []);
 
+  const deletePost = (e) => {
+    const { id } = e.target;
+
+    fetch(`/savedResults/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(() => {
+      const updatedSavedResults = savedResults.filter(result => result.id !== id);
+      setSavedResults(updatedSavedResults);
+    }).catch((err) => {
+      console.log(`An error has occurred in the FavoritesPage component while un-saving a result: ${err}`);
+      setError(ERROR_TEXT);
+    });
+  }
+
   return (
     <div>
       <p>{MY_SAVED_RESULTS}</p>
       {error && <div>{error}</div>}
-      <PreviousSearches savedResults={savedResults}/>
+      <PreviousSearches
+        savedResults={savedResults}
+        deletePost={deletePost}
+      />
     </div>
   );
 };

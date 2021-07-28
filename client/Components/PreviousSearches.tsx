@@ -9,18 +9,21 @@ interface SavedResults {
   companyName: string,
   apiWebsite: string,
   apiId: number,
+  id: number,
 };
 
 interface PreviousSearchesProps {
   savedResults: SavedResults[],
+  deletePost: Function,
 }
 
 const PreviousSearches: FC<PreviousSearchesProps> = (
-  { savedResults }: PreviousSearchesProps
+  { savedResults, deletePost }: PreviousSearchesProps
 ) => {
   const formattedResults = savedResults.map((result: SavedResults, i: number) => (
     <PreviousSearch
       key={`PreviousSearch${i}`}
+      deletePost={deletePost}
       {...result}
     />
   ));
