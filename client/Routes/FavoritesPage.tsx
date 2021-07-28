@@ -4,6 +4,10 @@ import PreviousSearches from '../Components/PreviousSearches';
 const MY_SAVED_RESULTS = 'My Saved Results';
 const SAVED_RESULTS_ROUTE = '/savedResults';
 const ERROR_TEXT = 'An error has occurred. Please refresh and try again.'
+const DELETE = 'DELETE';
+const HEADERS = {
+  'Content-Type': 'application/json',
+};
 
 interface SavedResult {
   title: string,
@@ -34,11 +38,9 @@ const FavoritesPage: FC<any> = () => {
   const deletePost = e => {
     const { id } = e.target;
 
-    fetch(`/savedResults/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      }
+    fetch(SAVED_RESULTS_ROUTE + '/' + id, {
+      method: DELETE,
+      headers: HEADERS,
     }).then(() => {
       const updatedSavedResults: SavedResult[] = savedResults.filter(result => (
         result.id !== Number(id)

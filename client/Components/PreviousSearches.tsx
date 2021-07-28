@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import PreviousSearch from './PreviousSearch';
 
-interface SavedResults {
+interface SavedResult {
   title: string,
   location: string,
   description: string,
@@ -13,14 +13,16 @@ interface SavedResults {
 };
 
 interface PreviousSearchesProps {
-  savedResults: SavedResults[],
+  savedResults: SavedResult[],
   deletePost: Function,
 }
 
 const PreviousSearches: FC<PreviousSearchesProps> = (
   { savedResults, deletePost }: PreviousSearchesProps
 ) => {
-  const formattedResults = savedResults.map((result: SavedResults, i: number) => (
+  const formattedResults = savedResults.map((
+    result: SavedResult, i: number
+  ) => (
     <PreviousSearch
       key={`PreviousSearch${i}`}
       deletePost={deletePost}
