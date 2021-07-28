@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import SaveButton from './SaveButton';
+
 const SearchResult: FC<any> = (props: any) => {
   const description = (
     <p
@@ -13,7 +15,7 @@ const SearchResult: FC<any> = (props: any) => {
       <div className="SearchResult">
         <div className="TitleAndSave">
           <p className="companyName">{props.companyName}</p>
-          <button className="SaveButton">save</button>
+          <SaveButton {...props}/>
         </div>
         <p className="title">{props.title}</p>
         {description}
