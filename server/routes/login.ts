@@ -1,13 +1,14 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { authController } from '../controllers/authController';
+import { userController } from '../controllers/userController';
+import { tokenController } from '../controllers/tokenController';
 
 const loginRouter = Router();
 
-loginRouter.post('/auth', authController.verifyUser, authController.createCookie, (req: Request, res: Response) => {
+loginRouter.post('/auth', userController.verifyUser, tokenController.createToken, (req: Request, res: Response) => {
   res.status(200).send();
 })
 
-loginRouter.post('/auth/verify', authController.verifyToken, (req: Request, res: Response) => {
+loginRouter.post('/auth/verify', tokenController.verifyToken, (req: Request, res: Response) => {
   res.status(200).send({verified: res.locals.verified});
 })
 

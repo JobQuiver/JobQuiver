@@ -1,23 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
-
 const SECRETKEY = 'LOLLLLLLLSSSSSSS';
 const MAXAGE = 120;
 
-export const authController = {
-  verifyUser: async (req: Request, res: Response, next: NextFunction)=> {
-    const {username, password} = req.body;
-    let userId = 9999;
-    if(username && password){
-      //check db and see if information matches
-      //need logic to res.locals.verify
-      //take userID and put into req.userID = userID;
-      req.body.userId = userId;
-    }
-    next();
-  },
-
-  createCookie: async (req: Request, res: Response, next: NextFunction) =>  {
+export const tokenController = {
+  createToken: async (req: Request, res: Response, next: NextFunction) =>  {
     let tokenKey;
     await jsonwebtoken.sign({ userId: req.body.userId }, SECRETKEY, {expiresIn: MAXAGE}, function(err, token){
       tokenKey = token
@@ -65,5 +52,5 @@ export const authController = {
     res.locals.verified = verified;
     return next();
   }
-  
-};
+
+}
