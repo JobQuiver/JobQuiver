@@ -1,0 +1,91 @@
+/* basic settings for the entire page */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* applies to everything within the html brackets */
+html{
+  background-color: #fff; 
+  color: black; 
+  font-family: 'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  text-rendering: optimizeLegibility;
+} 
+
+.SearchPageContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.FiltersContainer {
+  display: flex; 
+  flex-direction: column;
+}
+
+.SearchBar-Container {
+  background-color: green;
+  margin: 1rem 15rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.InputsContainer {
+  display: flex;
+  background-color: blue;
+  margin: .5rem 15rem;
+  justify-content: space-between;
+}
+
+.SearchResult {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  border-bottom: 5px solid #f3f3f3;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  margin: 1rem 15rem;
+  padding: 1rem;
+  overflow: hidden;
+  max-height: 150px;
+}
+
+.SearchResult:hover {
+  border-bottom: 5px solid royalblue;
+}
+
+.SearchResult p {
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.SearchResult .companyName {
+  font-size: 20px;
+}
+
+.companyName {
+  font-size: 25px;
+  color: green; 
+}
+
+.TitleAndSave {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SaveButton {
+  background-color: white;
+  padding: .25rem .9rem;
+  border-radius: 10px;
+  color: black;
+  font-size: .65rem;
+  font: red;
+  border: 1px solid orange;
+}
+
+.SaveButton:hover {
+  cursor: pointer;
+  color: red; 
+  font: blue; 
+  border: 1px solid orange; 
+}

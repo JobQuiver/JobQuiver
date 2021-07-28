@@ -33,7 +33,8 @@ const App: FC<any> = (props: any) => {
 
   return (
     <Router>
-      {verified ? <Redirect to="/SearchPage" /> : <Redirect to="/login" />}
+      {/* {verified ? <Redirect to="/SearchPage" /> : <Redirect to="/login" />} */}
+      <Redirect to="/SearchPage" />
       <Switch>
         <Route
           exact
