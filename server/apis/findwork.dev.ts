@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 import JobAPI from "./api";
+import * as Types from './api';
 
 const PAGE_COUNT = 50;
 
@@ -13,12 +14,15 @@ const PAGE_COUNT = 50;
     super('findwork.dev');
   }
 
-  search(page:number, locations:string[], keywords:string[]) {
+  search(page:number, {locations, keywords, level}:Types.SearchOptions) {
     return new Promise(async (resolve, reject) => {
       try {
         const setKeywords = keywords.join();
         // make a fetch request to the api
-        const url = 'https://findwork.dev/api/jobs/?search=' + keywords.reduce((str, k) => str + '+' + k, '') + '&' + locations.reduce((str, l, i) => str + 'location=' + l + (i !== locations.length - 1 ? '&': ''), '');
+        const url = 'https://findwork.dev/api/jobs/?search=' + 
+          keywords.reduce((str, k, i) => str + (i !== 0 ? '+' : '') + k, '') + (level !== undefined ? '+' + level : '') + '&' + 
+          locations.reduce((str, l, i) => str + 'location=' + l + (i !== locations.length - 1 ? '&': ''), '');
+
         console.log('Requesting date from Findwork.dev: ' + url);
         const jobs = await fetch(url, {headers: {Authorization: 'Token ' + process.env.FINDWORK_API_KEY}}).then(res => res.json());
         console.log('Received data from Findwork.dev = ', jobs.results?.length);
