@@ -4,6 +4,7 @@ import PreviousSearches from '../Components/PreviousSearches';
 const MY_SAVED_RESULTS = 'My Saved Results';
 const SAVED_RESULTS_ROUTE = '/savedResults';
 const ERROR_TEXT = 'An error has occurred. Please refresh and try again.'
+
 interface SavedResults {
   title: string,
   location: string,
@@ -14,7 +15,7 @@ interface SavedResults {
   apiId: number,
 };
 
-const FavoritesPage: FC<any> = (props: any) => {
+const FavoritesPage: FC<any> = () => {
   const [savedResults, setSavedResults] = useState<SavedResults[]>([]);
   const [error, setError] = useState('');
 
