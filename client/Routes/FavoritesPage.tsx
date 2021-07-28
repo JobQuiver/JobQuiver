@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import PreviousSearches from '../Components/PreviousSearches';
 
 const MY_SAVED_RESULTS = 'My Saved Results';
@@ -30,6 +30,7 @@ const FavoritesPage: FC<any> = () => {
       });
   }, []);
 
+  // TODO: update event type. 
   const deletePost = (e) => {
     const { id } = e.target;
 

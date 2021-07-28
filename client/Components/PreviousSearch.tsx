@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
+
+import Description from "./Description";
 
 // TODO: update deletepost type
 interface PreviousSearchProps {
-  title: string,
-  location: string,
-  description: string,
-  link: string,
-  companyName: string,
-  id: number,
-  deletePost: any,
-};
+  title: string;
+  location: string;
+  description: string;
+  link: string;
+  companyName: string;
+  id: number;
+  deletePost: any;
+}
 
 const PreviousSearch: FC<PreviousSearchProps> = ({
   title,
@@ -21,20 +23,23 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
   deletePost,
 }: PreviousSearchProps) => (
   <div>
-    <div className="PreviousSearch">
-      <p className="SavedName">{title}</p>
-      <p className="CompanyName">{companyName}</p>
-      <p className="Description">{description}</p>
-      <p className="Location">{location}</p>
-      <p className="Link">{link}</p>
+    <div className="SearchResult">
+      <div className="TitleAndSave">
+        <p className="companyName">{companyName}</p>
+        <button id={id.toString()} type="button" onClick={deletePost}>
+          Un-save Post
+        </button>
+      </div>
+      <p className="title">{title}</p>
+      <Description description={description} />
+      <p className="location">{location}</p>
+      <p>
+        {"See original posting "}
+        <a href={link} className="link">
+          here
+        </a>
+      </p>
     </div>
-    <button
-      id={id.toString()}
-      type="button"
-      onClick={deletePost}
-    >
-      Delete Post
-    </button>
   </div>
 );
 

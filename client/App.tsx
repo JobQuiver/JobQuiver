@@ -34,7 +34,7 @@ const App: FC<any> = (props: any) => {
   return (
     <Router>
       {/* {verified ? <Redirect to="/SearchPage" /> : <Redirect to="/login" />} */}
-      {/* <Redirect to="/SearchPage" /> */}
+      <Redirect to="/SearchPage" />
       <Switch>
         <Route
           exact
@@ -49,7 +49,6 @@ const App: FC<any> = (props: any) => {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/SearchPage" component={SearchPage} />
         <Route exact path="/FavoritePage" component={FavoritesPage} />
-        {/* <Redirect to="/SearchPage" /> */}
       </Switch>
     </Router>
   );
