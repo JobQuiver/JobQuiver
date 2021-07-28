@@ -39,7 +39,7 @@ const FavoritesPage: FC<any> = () => {
         'Content-Type': 'application/json',
       }
     }).then(() => {
-      const updatedSavedResults = savedResults.filter(result => result.id !== id);
+      const updatedSavedResults = savedResults.filter(result => result.id !== Number(id));
       setSavedResults(updatedSavedResults);
     }).catch((err) => {
       console.log(`An error has occurred in the FavoritesPage component while un-saving a result: ${err}`);
