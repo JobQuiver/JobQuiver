@@ -1,17 +1,6 @@
 import React, { FC } from 'react';
 
 const SearchResult: FC<any> = (props: any) => {
-  {
-    /* <p className="Salary-Range"></p> */
-  }
-
-  // const SavePost = () => {
-  //   fetch('/TBD', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     // body: json.stringify({})
-  //   });
-  // };
   const description = (
     <p
       className="description"
@@ -22,7 +11,10 @@ const SearchResult: FC<any> = (props: any) => {
   return (
     <div>
       <div className="SearchResult">
-        <p className="companyName">{props.companyName}</p>
+        <div className="TitleAndSave">
+          <p className="companyName">{props.companyName}</p>
+          <button className="SaveButton">save</button>
+        </div>
         <p className="title">{props.title}</p>
         {description}
         <p className="location">{props.location}</p>
@@ -31,12 +23,8 @@ const SearchResult: FC<any> = (props: any) => {
           <a href={props.link} className="link">
             here
           </a>
-          .
         </p>
       </div>
-      {/* <button type="button" onClick={() => SavePost()}>
-        Save Posting
-      </button> */}
     </div>
   );
 };

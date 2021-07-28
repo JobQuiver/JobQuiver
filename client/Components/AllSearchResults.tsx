@@ -4,7 +4,6 @@ import SearchResult from './SearchResult';
 const AllSearchResults: FC<any> = (props: any) => {
   let searchResultArray = [];
   if (props.state) {
-    // console.log('props.state', props.state);
     props.state.forEach((object, i) => {
       searchResultArray.push(
         <SearchResult
