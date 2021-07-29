@@ -114,7 +114,7 @@ const savedResultsController = {
       INSERT INTO users_saved_results (userId, resultId)
       VALUES ($1, $2);
     `
-
+    console.log(req.body);
     try {
       let savedResult = await db.query(
         findResultQuery,

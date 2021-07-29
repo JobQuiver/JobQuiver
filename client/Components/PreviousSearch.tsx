@@ -8,7 +8,7 @@ interface PreviousSearchProps {
   location: string;
   description: string;
   link: string;
-  companyName: string;
+  companyname: string;
   id: number;
   deletePost: any;
 }
@@ -18,7 +18,7 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
   location,
   description,
   link,
-  companyName,
+  companyname: companyName,
   id,
   deletePost,
 }: PreviousSearchProps) => (
