@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-// import Header from '../Components/Header';
 import Filters from '../Components/Filters';
 import AllSearchResults from '../Components/AllSearchResults';
 
