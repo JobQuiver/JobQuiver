@@ -84,13 +84,15 @@ const FavoritesPage: FC<any> = () => {
       {/* <Header /> */}
       <div className="FavoritePageHeaderContainer">
         <p className="FavoriteHeader">+ JobQuiver</p>
-        <a
-          className="FavoritePageSecondaryHeaderText"
-          href="http://localhost:8080/#/SearchPage"
-        >
-          Search Page
-        </a>
-        <button onClick={logout}>Logout</button>
+        <div className="SecondaryHeaderTextContainer">
+          <a
+            
+            href="http://localhost:8080/#/SearchPage"
+          >
+            Search Page
+          </a>
+          <button className="logout-favoritepage" onClick={logout}>Logout</button>
+        </div>
       </div>
       <div className="FavoritePageContainer">
         <p className="FavoritePageHeading">{MY_SAVED_RESULTS}</p>

@@ -26,10 +26,15 @@ const SearchPage: FC<any> = (props: any) => {
     history.push('/login');
   }
   return (
-    <div className="SearchPageContainer">
-      <p className="Header">+ JobQuiver<button onClick={logout}>LOGOUT</button></p>
-      <Filters setResults={setResults} />
-      <AllSearchResults state={results} />
+    <div>
+      <div className="SearchPageHeader">
+        <p>+ JobQuiver</p>
+        <button className="logoutbutton"onClick={logout}>Logout</button>
+      </div>
+      <div className="SearchPageContainer">
+        <Filters setResults={setResults} />
+        <AllSearchResults state={results} />
+      </div>
     </div>
   );
 };
