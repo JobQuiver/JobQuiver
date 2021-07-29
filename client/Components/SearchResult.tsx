@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import Description from './Description';
 import SaveButton from './SaveButton';
 
+
 const SearchResult: FC<any> = (props: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -34,6 +35,7 @@ const SearchResult: FC<any> = (props: any) => {
             here
           </a>
         </p>
+
       </div>
     </div>
   )

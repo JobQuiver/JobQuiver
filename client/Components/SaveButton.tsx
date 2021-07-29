@@ -2,7 +2,7 @@ import React, { FC, SyntheticEvent, useState } from 'react';
 
 const SAVE_JOB = 'Save Job';
 const SAVING = 'Saving...';
-const SAVED = 'Saved!'
+const SAVED = 'Saved!';
 const NOT_SAVED = 'Not Saved';
 const SAVED_RESULTS_ROUTE = '/savedResults';
 const POST = 'POST';
@@ -11,14 +11,14 @@ const HEADERS = {
 };
 
 interface SaveButtonProps {
-  title: string,
-  location: string,
-  description: string,
-  link: string,
-  companyName: string,
-  apiWebsite: string,
-  apiId: number,
-};
+  title: string;
+  location: string;
+  description: string;
+  link: string;
+  companyName: string;
+  apiWebsite: string;
+  apiId: number;
+}
 
 const SaveButton: FC<SaveButtonProps> = (props: SaveButtonProps) => {
   const [buttonText, setButtonText] = useState(SAVE_JOB);
@@ -32,7 +32,8 @@ const SaveButton: FC<SaveButtonProps> = (props: SaveButtonProps) => {
       method: POST,
       body: JSON.stringify(props),
       headers: HEADERS,
-    }).then(() => setButtonText(SAVED))
+    })
+      .then(() => setButtonText(SAVED))
       .catch(err => {
         console.log(`Error while saving result: ${err}`);
         setButtonText(NOT_SAVED);
@@ -40,7 +41,7 @@ const SaveButton: FC<SaveButtonProps> = (props: SaveButtonProps) => {
   };
 
   return (
-    <button onClick={handleClick}>
+    <button className="SaveButton" onClick={handleClick}>
       {buttonText}
     </button>
   );
