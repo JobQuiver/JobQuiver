@@ -1,33 +1,34 @@
 import { Router, Request, Response } from 'express';
 
 import savedResultsController from '../controllers/savedResultsController';
+import { tokenController } from '../controllers/tokenController';
 
 const savedResultRouter = Router();
 
 savedResultRouter.get(
   '/',
-  // auth?
+  tokenController.verifyToken,
   savedResultsController.getSavedResults,
   (req: Request, res: Response) => res.status(200).send(res.locals.results)
 );
 
 savedResultRouter.get(
   '/:id',
-  // auth?
+  tokenController.verifyToken,
   savedResultsController.getSavedResult,
   (req: Request, res: Response) => res.status(200).send(res.locals.result)
 );
 
 savedResultRouter.post(
   '/',
-  // auth?
+  tokenController.verifyToken,
   savedResultsController.saveResult,
   (req: Request, res: Response) => res.status(200).send(res.locals.result)
 );
 
 savedResultRouter.delete(
   '/:id',
-  // auth?
+  tokenController.verifyToken,
   savedResultsController.unsaveResult,
   (req: Request, res: Response) => res.sendStatus(204)
 );

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 const SECRETKEY = 'LOLLLLLLLSSSSSSS';
-const MAXAGE = 120;
+const MAXAGE = 2 * 60 * 60 * 1000;
 
 export const tokenController = {
   createToken: async (req: Request, res: Response, next: NextFunction) =>  {
@@ -31,15 +31,18 @@ export const tokenController = {
           */
          console.log('expired token');
          res.cookie('JQTokenKey', '00', {maxAge: 0});
+         res.locals.verified = verified;
+        return next();
         }
         else{
           req.body.userId = decoded.userId;
+          console.log('decoded userId', decoded.userId);
           verified = true;
+          res.locals.verified = verified;
+          return next();
         }
       });
     }
-    res.locals.verified = verified;
-    return next();
   }
 
 }

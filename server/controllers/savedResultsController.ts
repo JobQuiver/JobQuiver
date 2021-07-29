@@ -3,14 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import db from '../models/resultModel';
 
 const savedResultsController = {
-  // The current getSavedResults middleware assumes that a userId will be provided
-  // via the authMiddleware. -DLA
   getSavedResults: async (req: Request, res: Response, next: NextFunction) => {
-    //! for testing purposes, the userId is being hardcoded to 1. 
-    //! To be changed once auth middleware is integrated in. 
-    const userId = 1;
-    // const { userId } = res.locals;
+    const { userId } = req.body;
     const getAllSavedResultsQueryParams = [userId];
+    console.log('current user id (should be 2)', userId);
+
     const getAllSavedResultsQuery = `
       SELECT r.*
       FROM results
@@ -43,6 +40,7 @@ const savedResultsController = {
   getSavedResult: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const getSavedResultQueryParams = [id];
+
     const getSavedResultQuery = `
       SELECT *
       FROM results
@@ -65,8 +63,6 @@ const savedResultsController = {
       })
     }
   },
-  // The current saveResult middleware assumes that a userId will be provided
-  // via the authMiddleware. -DLA
   saveResult: async (req: Request, res: Response, next: NextFunction) => {
     const {
       title,
@@ -86,12 +82,10 @@ const savedResultsController = {
       apiWebsite,
       apiId,
     ];
-    //! for testing purposes, the userId is being hardcoded to 1. 
-    //! To be changed once auth middleware is integrated in. 
-    const userId = 1;
-    // const { userId } = res.locals;
 
-    // TODO: find a way to combine these queries. -DLA
+    const { userId } = req.body;
+    console.log('userId, should be 2 for hello,', userId);
+
     const findResultQuery = `
       SELECT * 
       FROM results 
@@ -144,14 +138,10 @@ const savedResultsController = {
       })
     }
   },
-  // The current saveResult middleware assumes that a userId will be provided
-  // via the authMiddleware. -DLA
   unsaveResult: async (req: Request, res: Response, next: NextFunction) => {
     const resultId = req.params.id;
-    //! for testing purposes, the userId is being hardcoded to 1. 
-    //! To be changed once auth middleware is integrated in. 
-    const userId = 1;
-    // const { userId } = res.locals;
+    const { userId } = req.body;
+
     const unsaveResultFromUserQueryParams = [resultId, userId];
     const unsaveResultFromUserQuery = `
       DELETE FROM users_saved_results
