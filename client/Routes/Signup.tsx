@@ -7,13 +7,14 @@ import {
   Switch,
   Link,
   Redirect,
+  useHistory,
 } from 'react-router-dom';
 
 const Signup: FC<any> = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
-
+  const history = useHistory();
   //saves user's input for username and password
   const setUsernameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -23,20 +24,18 @@ const Signup: FC<any> = () => {
   };
   //signs up the user
   const signupHandler = async () => {
-    await fetch('signup', {
+    await fetch('/login/authsignup', {
       method: 'POST',
       headers: {
-        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
     })
-      .then((response: any) => {
-        response.json;
-      })
+      .then((response: any) => response.json())
       .then((data: any) => {
-        if (data.valid) {
-          <Redirect to="/SearchPage" />;
+        if (data.verified) {
+          // <Redirect to="/SearchPage" />;
+          history.push('/SearchPage')
         } else {
           setErrorMessage('Invalid username/password');
         }

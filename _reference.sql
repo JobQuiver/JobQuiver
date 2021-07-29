@@ -7,7 +7,8 @@ CREATE TABLE users (
   id SERIAL,
   username varchar(255),
   password varchar(255),
-  googleId varchar(255)
+  googleId varchar(255),
+  githubId varchar(255),
 );
 
 INSERT INTO users (username, password, googleId)

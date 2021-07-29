@@ -24,4 +24,8 @@ loginRouter.get('/oauth/githubCallback', userController.callbackOAuthGitHub, use
   res.status(200).redirect('/');
 })
 
+loginRouter.post('/authsignup', userController.signupAuthUser, tokenController.createToken, (req: Request, res: Response) => {
+  res.status(200).send({verified: res.locals.verified});
+})
+
 export default loginRouter;

@@ -13,10 +13,12 @@ const SearchResult: FC<any> = (props: any) => {
   const inlineStyling = isCollapsed
     ? null
     : { maxHeight: 'none', overflow: 'auto' };
-
+  const divInline = isCollapsed
+    ? null
+    : { maxHeight: 'none', overflow: 'auto' };
   return (
     <div className="SearchResultsContainer">
-      <div className="SearchResult">
+      <div className="SearchResult" style={divInline}>
         <div className="TitleAndSave">
           <p className="companyName">{props.companyName}</p>
           <div>

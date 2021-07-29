@@ -7,12 +7,13 @@ import {
   Switch,
   Link,
   Redirect,
+  useHistory,
 } from 'react-router-dom';
 
 const Login: FC<any> = (props: any) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
+  const history = useHistory();
   // useEffect(() => {
   //   props.verifiedHandler();
   // });
@@ -56,7 +57,7 @@ const Login: FC<any> = (props: any) => {
 
   //redirect to signup page
   const signupHandler = () => {
-    <Redirect to="/signup" />;
+    history.push('/signup');
   };
 
   return (

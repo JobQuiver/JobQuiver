@@ -76,10 +76,12 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
   const inlineStyling = isCollapsed
     ? null
     : { maxHeight: 'none', overflow: 'auto' };
-
+  const divInline = isCollapsed
+    ? null
+    : { maxHeight: 'none', overflow: 'auto' };
   return (
     <div>
-      <div className="SearchResult FavoritePage">
+      <div className="SearchResult FavoritePage" style={divInline}>
         <div className="TitleAndSave">
           <p className="companyName">{companyName}</p>
           <div className="FavoriteButtons">
