@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
+
 import PreviousSearches from '../Components/PreviousSearches';
+import Header from '../Components/Header';
 
 const MY_SAVED_RESULTS = 'My Saved Results';
 const SAVED_RESULTS_ROUTE = '/savedResults';
@@ -55,6 +57,7 @@ const FavoritesPage: FC<any> = () => {
 
   return (
     <div>
+      <Header />
       <p>{MY_SAVED_RESULTS}</p>
       {error && <div>{error}</div>}
       <PreviousSearches

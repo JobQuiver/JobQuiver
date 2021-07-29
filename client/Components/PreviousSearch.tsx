@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import Description from "./Description";
 
@@ -21,26 +21,42 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
   companyname: companyName,
   id,
   deletePost,
-}: PreviousSearchProps) => (
-  <div>
-    <div className="SearchResult">
-      <div className="TitleAndSave">
-        <p className="companyName">{companyName}</p>
-        <button id={id.toString()} type="button" onClick={deletePost}>
-          Un-save Post
-        </button>
+}: PreviousSearchProps) => {
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const handleClick = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const inlineStyling = isCollapsed ? null : { maxHeight: 'none', overflow: 'auto' };
+
+  return (
+    <div>
+      <div className="SearchResult">
+        <div className="TitleAndSave">
+          <p className="companyName">{companyName}</p>
+          <button
+            className="ExpandButton"
+            onClick={handleClick}
+          >{isCollapsed ? 'expand +' : 'hide -'}</button>
+          <button id={id.toString()} type="button" onClick={deletePost}>
+            Un-save Post
+          </button>
+        </div>
+        <p className="title">{title}</p>
+        <div className="description-container" style={inlineStyling}>
+          <Description description={description} />
+        </div>
+        <p className="location">{location}</p>
+        <p>
+          {'See original posting '}
+          <a href={link} className="link">
+            here
+          </a>
+        </p>
       </div>
-      <p className="title">{title}</p>
-      <Description description={description} />
-      <p className="location">{location}</p>
-      <p>
-        {"See original posting "}
-        <a href={link} className="link">
-          here
-        </a>
-      </p>
     </div>
-  </div>
-);
+  )
+};
 
 export default PreviousSearch;
