@@ -19,10 +19,10 @@ const App: FC<any> = (props: any) => {
   };
 
   const checkLoggedin = () => {
-    fetch('login/verify', {
-      method: 'GET',
+    fetch('login/verifyToken', {
+      method: 'POST',
     })
-      .then((response: any) => response.json)
+      .then((response: any) => response.json())
       .then((data: any) => {
         if (data.verified) verifiedHandler();
         <Redirect to="/SearchPage" />;
