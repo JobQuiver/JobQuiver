@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Filters: FC<any> = (props: any) => {
   const [experience, setExperience] = useState<string>('');
@@ -78,13 +79,14 @@ const Filters: FC<any> = (props: any) => {
           >
             Search
           </button>
-          <button
-            className="savedsearches"
-            type="button"
-            // onClick={() => getResults()}
-          >
-            My Saved Searches
-          </button>
+          <Link to="/FavoritePage">
+            <button
+              className="savedsearches"
+              type="button"
+            >
+              My Saved Searches
+            </button>
+          </Link>
         </form>
       </label>
     </div>

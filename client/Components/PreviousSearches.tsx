@@ -6,7 +6,7 @@ interface SavedResult {
   location: string,
   description: string,
   link: string,
-  companyName: string,
+  companyname: string,
   apiWebsite: string,
   apiId: number,
   id: number,
