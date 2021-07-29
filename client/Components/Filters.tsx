@@ -41,7 +41,7 @@ const Filters: FC<any> = (props: any) => {
   };
 
   return (
-    <div className="FiltersContainer">
+    <div>
       <label>
         <form onSubmit={handleSubmit} className="InputsContainer">
           <input
