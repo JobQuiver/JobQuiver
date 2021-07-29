@@ -30,6 +30,9 @@ export const userController = {
     //check on database if req.body.userInfo.id exist in githubID for userTable
     //if if it does NOT
     //create user
+    // INSERT INTO results (title, location, description, link, companyName, apiWebsite, apiId)
+    //   VALUES ($1, $2, $3, $4, $5, $6, $7)
+    //   RETURNING *;
 
     //get userID from database
     //save to req.body.userId
