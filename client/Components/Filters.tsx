@@ -3,17 +3,16 @@ import React, { FC, useState } from 'react';
 const Filters: FC<any> = (props: any) => {
   const [experience, setExperience] = useState<string>('');
   const [location, setLocation] = useState<string>('');
-  const [salary, setSalary] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>('');
 
   const labelToSetState = {
     experience: setExperience,
     location: setLocation,
-    salary: setSalary,
+    keyword: setKeyword,
   };
 
   const handleChange = event => {
     event.preventDefault();
-
     let { name, value } = event.target;
     const updateState = labelToSetState[name];
     updateState(value);
@@ -25,48 +24,67 @@ const Filters: FC<any> = (props: any) => {
     const criteria = {
       experience,
       location,
-      salary,
     };
+  };
 
-    //we don't want to add info, so no 'POST', instead we want to get search results back based on this criteria, so we'd likely query the database based on the criteria somehow
-    fetch('/TBD', {
-      method: 'POST',
-      body: JSON.stringify({ criteria }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+  const getResults = () => {
+    const query = `?page=1&locations=${location.replace(
+      /\s/g,
+      '%20'
+    )}&keywords=${keyword}&level=${experience}`;
+    console.log('query', query);
+    fetch(`/search${query}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => props.setResults(data));
   };
 
   return (
-    <div>
+    <div className="FiltersContainer">
       <label>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="InputsContainer">
+          <input
+            type="search"
+            className="searchfields"
+            name="keyword"
+            placeholder="Keyword"
+            onChange={handleChange}
+          />
           <select
             id="experience"
             name="experience"
             onChange={handleChange}
-            className="Filters"
+            className="searchfields"
           >
             <option selected>Experience Level</option>
-            <option value="Entry">Entry</option>
-            <option value="Mid">Mid</option>
-            <option value="Senior">Senior</option>
+            <option value="Internship">Internship</option>
+            <option value="Entry%20Level">Entry</option>
+            <option value="Mid%20Level">Mid</option>
+            <option value="Senior%20Level">Senior</option>
+            <option value="management">Management</option>
           </select>
           <input
             className="searchFields"
             type="text"
-            id="name"
-            name="Location"
+            name="location"
             placeholder="Location"
             onChange={handleChange}
           />
-          <input
-            className="searchFields"
-            type="text"
-            id="name"
-            name="Salary"
-            placeholder="Minimum Salary"
-            onChange={handleChange}
-          />
+          <button
+            className="searchbarbutton"
+            type="button"
+            onClick={() => getResults()}
+          >
+            Search
+          </button>
+          <button
+            className="savedsearches"
+            type="button"
+            // onClick={() => getResults()}
+          >
+            My Saved Searches
+          </button>
         </form>
       </label>
     </div>

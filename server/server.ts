@@ -41,9 +41,11 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const { status, log, message } = err;
   console.log(err.log || 'Error: unknown error occurred');
 
-  return res.status(status || 500).send(message || 'An error occurred.');
+  return res.status(status || 500).json(message || 'An error occurred.');
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}...`);
 });
+
+export default server;

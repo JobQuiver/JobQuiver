@@ -1,0 +1,114 @@
+/* basic settings for the entire page */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* applies to everything within the html brackets */
+html{
+  background-color: #fff; 
+  color: black; 
+  font-family: 'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  text-rendering: optimizeLegibility;
+} 
+
+.Header {
+  width: 100vw;
+  padding: 1rem;
+  align-items: center;
+  background-color: green;
+  height: 5rem;
+  color: #fff;
+}
+
+.HeaderShadow {
+    box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+}
+
+.InputsContainer {
+  display: flex;
+  margin: .5rem 15rem;
+  justify-content: space-between;
+} 
+
+.searchbarbutton {
+  width: 7rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.savedsearches {
+  width: 10rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.searchfields {
+  color: green;
+  width: 25%;
+  height: 1.5rem;
+  border: 1px solid gray;
+  margin: 2rem 0rem 1rem 0rem;
+}
+
+.SearchResult {
+  border-bottom: 1px solid #b5b5b5;
+  margin: 0rem 15rem;
+  padding: 2rem 0rem;
+}
+
+.description-container {
+  overflow: hidden;
+  max-height: 170px;
+  margin: 18px 0;
+}
+
+/* .SearchResult:first-child {
+  border-top: 1px solid grey;
+} */
+
+.SearchResult:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.SearchResult p {
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.SearchResult .companyName {
+  font-size: 20px;
+}
+
+.companyName {
+  font-size: 25px;
+  color: green; 
+}
+
+.TitleAndButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SaveButton, 
+.ExpandButton {
+  background-color: #fff;
+  padding: .25rem .9rem;
+  border-radius: 10px;
+  color: #000;
+  font-size: .65rem;
+  font: red;
+  border: 1px solid orange;
+  margin: 0rem .25rem;
+}
+
+.SaveButton:hover,
+.ExpandButton:hover {
+  cursor: pointer;
+  color: red; 
+  font: blue; 
+  border: 1px solid orange; 
+}

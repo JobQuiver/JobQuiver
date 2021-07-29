@@ -10,7 +10,7 @@ import {
 import Login from './Routes/Login';
 import Signup from './Routes/Signup';
 import SearchPage from './Routes/SearchPage';
-import FavoritePage from './Routes/SearchPage';
+import FavoritesPage from './Routes/FavoritesPage';
 
 const App: FC<any> = (props: any) => {
   const [verified, setVerified] = React.useState<boolean>(false);
@@ -33,7 +33,8 @@ const App: FC<any> = (props: any) => {
 
   return (
     <Router>
-      {verified ? <Redirect to="/SearchPage" /> : <Redirect to="/login" />}
+      {/* {verified ? <Redirect to="/SearchPage" /> : <Redirect to="/login" />} */}
+      <Redirect to="/SearchPage" />
       <Switch>
         <Route
           exact
@@ -47,7 +48,7 @@ const App: FC<any> = (props: any) => {
         />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/SearchPage" component={SearchPage} />
-        <Route exact path="/FavoritePage" component={FavoritePage} />
+        <Route exact path="/FavoritePage" component={FavoritesPage} />
       </Switch>
     </Router>
   );

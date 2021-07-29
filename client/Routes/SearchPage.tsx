@@ -1,15 +1,16 @@
-import React, { FC } from 'react';
-
-import SearchBar from '../Components/SearchBar';
+import React, { FC, useState } from 'react';
+import Header from '../Components/Header';
 import Filters from '../Components/Filters';
 import AllSearchResults from '../Components/AllSearchResults';
 
 const SearchPage: FC<any> = (props: any) => {
+  const [results, setResults] = useState<any>([]);
+
   return (
-    <div>
-      <SearchBar />
-      <Filters />
-      <AllSearchResults />
+    <div className="SearchPageContainer">
+      <Header />
+      <Filters setResults={setResults} />
+      <AllSearchResults state={results} />
     </div>
   );
 };
