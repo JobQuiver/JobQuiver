@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+body{
+  margin-top:0;
+  padding-top:0;
+}
+
 /* applies to everything within the html brackets */
 html{
   background-color: #fff; 
@@ -22,17 +27,20 @@ html{
   background-color: green;
   height: 5rem;
   color: #fff;
+  margin-top: -50;
+  box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
 }
 
-.HeaderShadow {
-    box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+.SearchPageContainer {
+  margin-top: 50px;
 }
 
 .InputsContainer {
   display: flex;
-  margin: .5rem 15rem;
+  margin: .5rem 27rem .5rem 27rem;
   justify-content: space-between;
-} 
+  padding-top: 5rem;
+}
 
 .searchbarbutton {
   width: 7rem;
@@ -48,22 +56,46 @@ html{
 
 .searchfields {
   color: green;
-  width: 25%;
+  width: 21%;
   height: 1.5rem;
   border: 1px solid gray;
   margin: 2rem 0rem 1rem 0rem;
+  border-radius: 3px;
+}
+
+.SearchResultsContainer {
+  border-top: 1px solid #b5b5b5;
+  margin: 0rem 27rem; 
+}
+
+.SearchResultsContainer:last-child {
+  margin-bottom: 75px;
+}
+
+.SearchResultsContainer:first-child {
+  border-top: 1px solid #b5b5b5;
 }
 
 .SearchResult {
-  border-bottom: 1px solid #b5b5b5;
-  margin: 0rem 15rem;
-  padding: 2rem 0rem;
+  padding: 1rem 1rem;
+  overflow: hidden;
+  max-height: 170px;
 }
 
 .description-container {
   overflow: hidden;
   max-height: 170px;
   margin: 18px 0;
+
+  /* border-bottom: 1px solid #b5b5b5; */
+  /* margin: 0rem 15rem; */
+  
+  /* word-break: normal; */
+}
+
+.SearchResult p {
+  -webkit-line-clamp: 3;
+
 }
 
 /* .SearchResult:first-child {
@@ -88,9 +120,10 @@ html{
   color: green; 
 }
 
-.TitleAndButtons {
+.TitleAndSave {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .SaveButton, 
