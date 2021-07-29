@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { render } from "react-dom";
+import React, { FC, useState } from 'react';
+import { render } from 'react-dom';
 
 import {
   BrowserRouter as Router,
@@ -7,7 +7,7 @@ import {
   Switch,
   Link,
   Redirect,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 const Signup: FC<any> = () => {
   const [username, setUsername] = useState<string>('');
@@ -23,29 +23,45 @@ const Signup: FC<any> = () => {
   };
   //signs up the user
   const signupHandler = async () => {
-    await fetch("signup",  {
+    await fetch('signup', {
       method: 'POST',
-      headers: {'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password}),
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
     })
-    .then((response: any) => {response.json})
-    .then((data: any) => {
-      if(data.valid){
-        <Redirect to='/SearchPage'/>
-      }
-      else{
-        setErrorMessage('Invalid username/password');
-      }
-    });
+      .then((response: any) => {
+        response.json;
+      })
+      .then((data: any) => {
+        if (data.valid) {
+          <Redirect to="/SearchPage" />;
+        } else {
+          setErrorMessage('Invalid username/password');
+        }
+      });
   };
 
   return (
-    <div className='LoginContainer'>
-      <input className='usernameInput' type='text' value={username} onChange={setUsernameHandler} />
-      <input className='passwordInput' type='text' value={password} onChange={setPasswordHandler} />
-      <button className='LoginSignupButton' onClick={signupHandler}>Sign Up</button>
-      <div className='errorMessage'>{errorMessage}</div>
+    <div className="LoginContainer">
+      <p className="Header">+ JobQuiver</p>
+      <input
+        className="usernameInput"
+        type="text"
+        value={username}
+        onChange={setUsernameHandler}
+      />
+      <input
+        className="passwordInput"
+        type="text"
+        value={password}
+        onChange={setPasswordHandler}
+      />
+      <button className="LoginSignupButton" onClick={signupHandler}>
+        Sign Up
+      </button>
+      <div className="errorMessage">{errorMessage}</div>
     </div>
   );
 };

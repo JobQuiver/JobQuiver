@@ -5,7 +5,7 @@ const GITHUB_STATE = process.env.GITHUB_STATE;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const REDIRECTPORT = process.env.NODE_ENV === 'production' ? 3000 : 8080;
-
+console.log(GITHUB_STATE);
 export const userController = {
   verifyAuthUser: async (req: Request, res: Response, next: NextFunction)=> {
     const {username, password} = req.body;

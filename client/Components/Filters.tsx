@@ -80,15 +80,13 @@ const Filters: FC<any> = (props: any) => {
             Search
           </button>
           <Link to="/FavoritePage">
-            <button
-              className="savedsearches"
-              type="button"
-            >
+            <button className="savedsearches" type="button">
               My Saved Searches
             </button>
           </Link>
         </form>
       </label>
+      <p className="TextBelowSearchBar">See Job Postings</p>
     </div>
   );
 };

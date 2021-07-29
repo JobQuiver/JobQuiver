@@ -13,23 +13,84 @@ body{
 /* applies to everything within the html brackets */
 html{
   background-color: #fff; 
-  color: black; 
+  color: #6c7c7c; 
   font-family: 'Lato', 'Arial', sans-serif;
   font-weight: 300;
   font-size: 17px;
   text-rendering: optimizeLegibility;
 } 
 
-.Header {
-  width: 100vw;
-  padding: 1rem;
+/* LOGIN PAGE */
+
+/* .LoginContainer {
+  margin-top: 100px;
+} */
+
+.SignUpHeader {
+  display: flex;
   align-items: center;
-  background-color: green;
+  position: fixed;
+  padding: 1rem 15rem;
+  width: 100vw;
   height: 5rem;
+  background-color: #f05455;
   color: #fff;
-  margin-top: -50;
-  box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+  font-size: 1.75rem;
+} 
+
+.loginSignupButtonContainer {
+  padding-top: 25vh;
+  margin: 0rem 38vw;
 }
+
+.loginSignupButtonContainer div {
+  display: flex; 
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.loginSignupButtonContainer input {
+  width: 325px; 
+}
+
+.loginSignupButtonContainer button {
+  width: 100px;
+  padding: .25rem; 
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+  border: 1px solid #f05455;
+}
+
+.loginSignupButtonContainer button:hover{
+  width: 100px;
+  padding: .25rem;
+  cursor: pointer; 
+  background-color: #f05455;
+  color: white; 
+  transition: all 0.3s ease, 
+}
+
+.HomepageButtonContainer {
+  display: flex; 
+  justify-content: space-between;
+}
+
+/* SEARCH PAGE */
+.Header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  margin-top: -50;
+  padding: 1rem 15rem;
+  width: 100vw;
+  height: 5rem;
+  background-color: #f05455;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+  font-size: 1.75rem;
+} 
 
 .SearchPageContainer {
   margin-top: 50px;
@@ -37,7 +98,7 @@ html{
 
 .InputsContainer {
   display: flex;
-  margin: .5rem 27rem .5rem 27rem;
+  margin: .5rem 15rem .5rem 15rem;
   justify-content: space-between;
   padding-top: 5rem;
 }
@@ -46,17 +107,34 @@ html{
   width: 7rem;
   height: 1.5rem;
   margin: 2rem 0rem;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+  border: 1px solid #f05455;
+}
+
+.TextBelowSearchBar {
+  margin: 0rem 15rem 1rem 15rem; 
 }
 
 .savedsearches {
   width: 10rem;
   height: 1.5rem;
   margin: 2rem 0rem;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #f05455;
+}
+
+.searchbarbutton:hover,
+.savedsearches:hover {
+  cursor: pointer; 
+  color: #f05455; 
+  transition: all 0.3s ease,
 }
 
 .searchfields {
-  color: green;
-  width: 21%;
+  width: 25%;
   height: 1.5rem;
   border: 1px solid gray;
   margin: 2rem 0rem 1rem 0rem;
@@ -64,51 +142,53 @@ html{
 }
 
 .SearchResultsContainer {
-  border-top: 1px solid #b5b5b5;
-  margin: 0rem 27rem; 
+  /* border-top: 1px solid black; */
+  margin: 0rem 15rem; 
+}
+
+.SearchResultsContainer:first-child {
+  border-top: 1px solid #ededed
+  ;
 }
 
 .SearchResultsContainer:last-child {
   margin-bottom: 75px;
-}
-
-.SearchResultsContainer:first-child {
-  border-top: 1px solid #b5b5b5;
+  border-bottom: 1px solid #ededed;
 }
 
 .SearchResult {
   padding: 1rem 1rem;
   overflow: hidden;
   max-height: 170px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #ededed;
+}
+
+.SearchResult:hover {
+  cursor: pointer;
+  background-color: #ededed;
+  border-top:  1px solid #f05455;
+  border-bottom: 1px solid #f05455;
+  transition: all 0.3s ease,
+}
+
+.SearchResult p {
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.title {
+  margin-top: .5rem;
+}
+
+.description p {
+  line-height: 165%;
 }
 
 .description-container {
   overflow: hidden;
   max-height: 170px;
   margin: 18px 0;
-
-  /* border-bottom: 1px solid #b5b5b5; */
-  /* margin: 0rem 15rem; */
-  
-  /* word-break: normal; */
-}
-
-.SearchResult p {
-  -webkit-line-clamp: 3;
-
-}
-
-/* .SearchResult:first-child {
-  border-top: 1px solid grey;
-} */
-
-.SearchResult:hover {
-  background-color: rgb(243, 243, 243);
-}
-
-.SearchResult p {
-  font-size: 15px;
-  line-height: 150%;
 }
 
 .SearchResult .companyName {
@@ -117,7 +197,8 @@ html{
 
 .companyName {
   font-size: 25px;
-  color: green; 
+  /* color: #ee7d7d;  */
+  color: #f05455; 
 }
 
 .TitleAndSave {
@@ -134,14 +215,112 @@ html{
   color: #000;
   font-size: .65rem;
   font: red;
-  border: 1px solid orange;
+  border: 1px solid #f05455;
   margin: 0rem .25rem;
 }
 
 .SaveButton:hover,
 .ExpandButton:hover {
   cursor: pointer;
-  color: red; 
-  font: blue; 
-  border: 1px solid orange; 
+  color: white; 
+  font: white; 
+  background-color: #f05455;
+  border: 1px solid #f05455; 
+  transition: all 0.3s ease,
+}
+
+/* FAVORITES PAGE */
+
+.FavoritePage {
+  margin: 0rem 15rem;
+  padding: 1rem 1rem;
+  overflow: hidden;
+  max-height: 170px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #ededed;
+}
+
+.FavoritePageContainer {
+  padding-top: 10rem;
+}
+.FavoritePageHeading {
+  margin: 0rem 15rem 2rem 15rem;
+  font-size: 1.25rem;
+}
+
+.unsavePost {
+  background-color: #fff;
+  padding: .25rem .9rem;
+  border-radius: 10px;
+  color: #000;
+  font-size: .65rem;
+  font: red;
+  border: 1px solid #f05455;
+  margin: 0rem .25rem;
+}
+
+.unsavePost:hover {
+  cursor: pointer;
+  color: white; 
+  font: white; 
+  background-color: #f05455;
+  border: 1px solid #f05455; 
+  transition: all 0.3s ease,
+}
+
+.FavoriteButtons {
+  display: flex;
+}
+
+/* .FavoriteHeader {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  padding: 1rem 15rem;
+  width: 100vw;
+  height: 5rem;
+  background-color: #f05455;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+  font-size: 1.75rem;
+}  */
+
+.FavoritePageHeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  padding: 1rem 15rem;
+  width: 100vw;
+  height: 5rem;
+  background-color: #f05455;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+  font-size: 1.75rem;
+}
+
+.FavoritePageSecondaryHeaderText {
+  font-size: 1rem;
+  align-self: flex-end;
+  margin-right: 30px;
+  margin-bottom: 9px;
+  text-decoration: none; 
+  border-bottom: 2px solid transparent;
+}
+
+a:hover {
+  border-bottom: 2px solid white;
+  transition: all 0.3s ease, 
+}
+
+a:visited {
+  color:white;
+}
+
+/* .FavoritePage:first-child {
+  border-top: 1px solid #ededed;
+} */
+
+.FavoritePageContainer:last-child {
+  margin-bottom: 75px;
 }

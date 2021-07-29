@@ -1,0 +1,132 @@
+basic settings for the entire page
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  margin-top:0;
+  padding-top:0;
+}
+
+/* applies to everything within the html brackets */
+html{
+  background-color: #fff; 
+  color: black; 
+  font-family: 'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  text-rendering: optimizeLegibility;
+} 
+
+.Header {
+  position: fixed;
+  width: 100vw;
+  padding: 1rem;
+  align-items: center;
+  background-color: green;
+  height: 5rem;
+  color: #fff;
+  margin-top: -50;
+  box-shadow: rgb(0 0 0 / 50%) 0px 10px 25px 2px, rgb(0 0 0 / 4%) 0px 10px 10px 2px;
+}
+
+.SearchPageContainer {
+  margin-top: 50px;
+}
+
+.InputsContainer {
+  display: flex;
+  margin: .5rem 27rem .5rem 27rem;
+  justify-content: space-between;
+  padding-top: 5rem;
+}
+
+.searchbarbutton {
+  width: 7rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.savedsearches {
+  width: 10rem;
+  height: 1.5rem;
+  margin: 2rem 0rem;
+}
+
+.searchfields {
+  color: green;
+  width: 21%;
+  height: 1.5rem;
+  border: 1px solid gray;
+  margin: 2rem 0rem 1rem 0rem;
+  border-radius: 3px;
+}
+
+.SearchResultsContainer {
+  border-top: 1px solid #b5b5b5;
+  margin: 0rem 27rem; 
+}
+
+.SearchResultsContainer:last-child {
+  margin-bottom: 75px;
+}
+
+.SearchResultsContainer:first-child {
+  border-top: 1px solid #b5b5b5;
+}
+
+.SearchResult {
+  padding: 1rem 1rem;
+  overflow: hidden;
+  max-height: 170px;
+}
+
+.SearchResult p {
+  -webkit-line-clamp: 3;
+}
+
+.SearchResult:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.SearchResult p {
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.SearchResult .companyName {
+  font-size: 20px;
+}
+
+.companyName {
+  font-size: 25px;
+  color: green; 
+}
+
+.TitleAndSave {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SaveButton, 
+.ExpandButton {
+  background-color: #fff;
+  padding: .25rem .9rem;
+  border-radius: 10px;
+  color: #000;
+  font-size: .65rem;
+  font: red;
+  border: 1px solid orange;
+  margin: 0rem .25rem;
+}
+
+.SaveButton:hover,
+.ExpandButton:hover {
+  cursor: pointer;
+  color: red; 
+  font: blue; 
+  border: 1px solid orange; 
+}
