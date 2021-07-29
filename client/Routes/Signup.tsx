@@ -43,25 +43,46 @@ const Signup: FC<any> = () => {
   };
 
   return (
-    <div className="LoginContainer">
-      <p className="Header">+ JobQuiver</p>
-      <input
-        className="usernameInput"
-        type="text"
-        value={username}
-        onChange={setUsernameHandler}
-      />
-      <input
-        className="passwordInput"
-        type="text"
-        value={password}
-        onChange={setPasswordHandler}
-      />
-      <button className="LoginSignupButton" onClick={signupHandler}>
-        Sign Up
-      </button>
-      <div className="errorMessage">{errorMessage}</div>
+    // <div className="LoginContainer">
+    //   <p className="Header">+ JobQuiver</p>
+    //   <input
+    //     className="usernameInput"
+    //     type="text"
+    //     value={username}
+    //     onChange={setUsernameHandler}
+    //   />
+    //   <input
+    //     className="passwordInput"
+    //     type="text"
+    //     value={password}
+    //     onChange={setPasswordHandler}
+    //   />
+    //   <button className="LoginSignupButton" onClick={signupHandler}>
+    //     Sign Up
+    //   </button>
+    //   <div className="errorMessage">{errorMessage}</div>
+    // </div>
+    
+  <div>
+      <div>
+        <p className="SignUpHeader">+ JobQuiver</p>
+      </div>
+      <div className="loginSignupButtonContainer">
+        <div>
+          Username:
+          <input className="usernameInput" type="text" value={username} onChange={setUsernameHandler}/>
+        </div>
+        <div>
+          Password:
+          <input className="passwordInput" type="text" value={password} onChange={setPasswordHandler}/>
+        </div>
+        <div className="HomepageButtonContainer" style={{justifyContent:'center'}}>
+          <button className="LoginSignupButton" onClick={signupHandler}>Sign Up</button>
+          <div className="errorMessage">{errorMessage}</div>
+        </div>
+      </div>
     </div>
+    
   );
 };
 
