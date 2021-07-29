@@ -1,3 +1,4 @@
+import { response } from "express";
 import React, { FC, useState, useEffect } from "react";
 import { render } from "react-dom";
 import {
@@ -11,6 +12,7 @@ import {
 const Login: FC<any> = (props: any) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
 
   // useEffect(() => {
   //   props.verifiedHandler();
@@ -32,21 +34,27 @@ const Login: FC<any> = (props: any) => {
       },
       body: JSON.stringify({ username, password }),
     })
-      .then((response: any) => {
-        response.json;
-      })
+      .then((response: any) => response.json())
       .then((data: any) => {
-        if (data.valid) {
+        if (data.verified) {
           props.verifiedHandler();
         }
       });
   };
-  //login the user by oAuth
+
   const oAuthLoginHandler = async () => {
-    await fetch("/login/oauth", {
-      method: "POST",
+    await fetch('/login/oauth/github', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      window.location.href = data.url
     });
   };
+
   //redirect to signup page
   const signupHandler = () => {
     <Redirect to="/signup" />;
@@ -55,8 +63,11 @@ const Login: FC<any> = (props: any) => {
   return (
     <div>
       <div className="loginSignupButtonContainer">
+        <div>Username:<input defaultValue={username} onChange={setUsernameHandler}/></div>
+        <div>Password:<input defaultValue={password} onChange={setPasswordHandler}/></div>
         <button onClick={signupHandler}>Signup</button>
         <button onClick={authLoginHandler}>Login</button>
+        <button onClick={oAuthLoginHandler}>Github</button>
       </div>
     </div>
   );

@@ -12,11 +12,11 @@ import cookieParser = require('cookie-parser');
 // import https from 'https';
 // import fs from 'fs';
 
-import loginRouter from './routes/login';
 import searchRouter from './routes/search';
 import savedResultsRouter from './routes/savedResults';
 
 config();
+import loginRouter from './routes/login';
 
 const PORT = process.env.APP_PORT;
 const app: Application = express();

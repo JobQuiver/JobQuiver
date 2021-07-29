@@ -5,26 +5,16 @@ const MAXAGE = 120;
 
 export const tokenController = {
   createToken: async (req: Request, res: Response, next: NextFunction) =>  {
-    let tokenKey;
+    // let tokenKey;
     await jsonwebtoken.sign({ userId: req.body.userId }, SECRETKEY, {expiresIn: MAXAGE}, function(err, token){
-      tokenKey = token
-    });
-    res.cookie('JQTokenKey', tokenKey);
-    await jsonwebtoken.verify(tokenKey, SECRETKEY, function(err, decoded) {
-      if (err) {
-        /*
-          err = {
-            name: 'TokenExpiredError',
-            message: 'jwt expired',
-            expiredAt: 1408621000
-          }
-        */
+      if(err){
+        console.log(err);
       }
       else{
-        console.log(decoded);
+        res.cookie('JQTokenKey', token);
       }
+      next();
     });
-    next();
   },
 
   verifyToken: async (req: Request, res: Response, next: NextFunction) => {
@@ -44,7 +34,6 @@ export const tokenController = {
         }
         else{
           req.body.userId = decoded.userId;
-          console.log('req.body.userId', req.body.userId);
           verified = true;
         }
       });
