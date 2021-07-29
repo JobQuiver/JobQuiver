@@ -7,7 +7,7 @@ const SearchPage: FC<any> = (props: any) => {
 
   return (
     <div className="SearchPageContainer">
-      <p className="Header">JobQuiver</p>
+      <p className="Header">+ JobQuiver</p>
       <Filters setResults={setResults} />
       <AllSearchResults state={results} />
     </div>

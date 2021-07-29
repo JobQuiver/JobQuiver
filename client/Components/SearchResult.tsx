@@ -15,14 +15,16 @@ const SearchResult: FC<any> = (props: any) => {
     : { maxHeight: 'none', overflow: 'auto' };
 
   return (
-    <div>
+    <div className="SearchResultsContainer">
       <div className="SearchResult">
         <div className="TitleAndSave">
           <p className="companyName">{props.companyName}</p>
-          <button className="ExpandButton" onClick={handleClick}>
-            {isCollapsed ? 'expand +' : 'hide -'}
-          </button>
-          <SaveButton {...props} />
+          <div>
+            <button className="ExpandButton" onClick={handleClick}>
+              {isCollapsed ? 'Expand +' : 'Hide -'}
+            </button>
+            <SaveButton {...props} />
+          </div>
         </div>
         <p className="title">{props.title}</p>
         <div className="description-container" style={inlineStyling}>

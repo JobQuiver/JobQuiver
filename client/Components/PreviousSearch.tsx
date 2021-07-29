@@ -1,5 +1,3 @@
-// import React, { FC } from 'react';
-
 // import Description from './Description';
 
 // // TODO: update deletepost type
@@ -81,15 +79,22 @@ const PreviousSearch: FC<PreviousSearchProps> = ({
 
   return (
     <div>
-      <div className="SearchResult">
+      <div className="SearchResult FavoritePage">
         <div className="TitleAndSave">
           <p className="companyName">{companyName}</p>
-          <button className="ExpandButton" onClick={handleClick}>
-            {isCollapsed ? 'expand +' : 'hide -'}
-          </button>
-          <button id={id.toString()} type="button" onClick={deletePost}>
-            Un-save Post
-          </button>
+          <div className="FavoriteButtons">
+            <button className="ExpandButton" onClick={handleClick}>
+              {isCollapsed ? 'Expand +' : 'Hide -'}
+            </button>
+            <button
+              className="unsavePost"
+              id={id.toString()}
+              type="button"
+              onClick={deletePost}
+            >
+              Un-save Post
+            </button>
+          </div>
         </div>
         <p className="title">{title}</p>
         <div className="description-container" style={inlineStyling}>

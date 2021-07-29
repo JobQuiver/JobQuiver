@@ -13,7 +13,7 @@ interface SavedResult {
 }
 
 interface PreviousSearchesProps {
-  savedResults: SavedResult[];
+  savedResults: any;
   deletePost: Function;
 }
 

@@ -40,7 +40,11 @@ const SaveButton: FC<SaveButtonProps> = (props: SaveButtonProps) => {
       });
   };
 
-  return <button onClick={handleClick}>{buttonText}</button>;
+  return (
+    <button className="SaveButton" onClick={handleClick}>
+      {buttonText}
+    </button>
+  );
 };
 
 export default SaveButton;
