@@ -43,6 +43,10 @@ export const tokenController = {
         }
       });
     }
-  }
+  },
 
+  deleteCookie: async (req: Request, res: Response, next: NextFunction) => {
+    res.cookie('JQTokenKey', '00', {maxAge: 0});
+    return next();
+  }
 }
