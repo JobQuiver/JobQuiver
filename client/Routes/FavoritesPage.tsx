@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-
+import {useHistory, Redirect} from 'react-router-dom';
 import PreviousSearches from '../Components/PreviousSearches';
 // import Header from '../Components/Header';
 
@@ -25,7 +25,7 @@ interface SavedResult {
 const FavoritesPage: FC<any> = () => {
   const [savedResults, setSavedResults] = useState<SavedResult[]>([]);
   const [error, setError] = useState('');
-
+  const history = useHistory();
   useEffect(() => {
     fetch(SAVED_RESULTS_ROUTE)
       .then(res => res.json())
@@ -37,6 +37,20 @@ const FavoritesPage: FC<any> = () => {
         setError(ERROR_TEXT);
       });
   }, []);
+
+  const checkLoggedin = () => {
+    fetch('login/verifyToken', {
+      method: 'POST',
+    })
+      .then((response: any) => response.json())
+      .then((data: any) => {
+        if (!data.verified)
+          // useHistory.push('/login');
+          <Redirect to='/login'/>
+      });
+  };
+
+  checkLoggedin();
 
   // TODO: update event type.
   const deletePost = e => {
@@ -60,6 +74,10 @@ const FavoritesPage: FC<any> = () => {
         setError(ERROR_TEXT);
       });
   };
+  const logout = async () => {
+    await fetch('/login/logout');
+    history.push('/login');
+  }
 
   return (
     <div>
@@ -72,6 +90,7 @@ const FavoritesPage: FC<any> = () => {
         >
           Search Page
         </a>
+        <button onClick={logout}>Logout</button>
       </div>
       <div className="FavoritePageContainer">
         <p className="FavoritePageHeading">{MY_SAVED_RESULTS}</p>

@@ -28,4 +28,8 @@ loginRouter.post('/authsignup', userController.signupAuthUser, tokenController.c
   res.status(200).send({verified: res.locals.verified});
 })
 
+loginRouter.get('/logout', tokenController.deleteCookie, (req: Request, res: Response) => {
+  res.status(200).send({verified: false});
+})
+
 export default loginRouter;

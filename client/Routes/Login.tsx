@@ -38,6 +38,7 @@ const Login: FC<any> = (props: any) => {
       .then((data: any) => {
         if (data.verified) {
           props.verifiedHandler();
+          history.push('/SearchPage');
         }
       });
   };
